@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Hosted Postgres (Neon / Supabase free tier). Set DATABASE_URL in .env locally
+// and in Vercel environment variables for production.
+// Restaurants & menu items are NOT here — they live in data/restaurants.json.
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SlotType {
+  LUNCH
+  DINNER
+}
+
+enum SlotStatus {
+  OPEN
+  FULL
+  CLOSED // cut-off passed
+  CANCELLED // below minimum orders, auto-refund
+  COMPLETED
+}
+
+model Slot {
+  id            String     @id @default(cuid())
+  date          String // yyyy-mm-dd in Asia/Kolkata
+  type          SlotType
+  cutoffAt      DateTime
+  deliveryStart DateTime
+  deliveryEnd   DateTime
+  capacity      Int        @default(20)
+  minOrders     Int        @default(8)
+  status        SlotStatus @default(OPEN)
+  orders        Order[]
+
+  @@unique([date, type])
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  CONFIRMED
+  PREPARING
+  PICKED_UP
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+model Order {
+  id               String      @id @default(cuid())
+  slotId           String
+  slot             Slot        @relation(fields: [slotId], references: [id])
+  customerName     String
+  phone            String
+  area             String // must be one of the serviced areas
+  address          String
+  landmark         String      @default("")
+  subtotalPaise    Int
+  deliveryFeePaise Int
+  totalPaise       Int
+  status           OrderStatus @default(PENDING_PAYMENT)
+  paymentProvider  String      @default("razorpay") // or "manual_upi"
+  paymentOrderId   String? // razorpay order id
+  paymentId        String? // razorpay payment id
+  paidAt           DateTime?
+  idempotencyKey   String      @unique
+  createdAt        DateTime    @default(now())
+  items            OrderItem[]
+
+  @@index([slotId, status])
+}
+
+model OrderItem {
+  id             String  @id @default(cuid())
+  orderId        String
+  order          Order   @relation(fields: [orderId], references: [id])
+  menuItemId     String // id from data/restaurants.json (not a FK — menu is a file)
+  restaurantName String // frozen at order time
+  nameSnapshot   String // frozen at order time
+  pricePaiseSnap Int // frozen at order time
+  qty            Int
+}

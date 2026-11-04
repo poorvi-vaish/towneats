@@ -1,0 +1,66 @@
+{
+  "restaurants": [
+    {
+      "id": "sharma-bhojnalaya",
+      "name": "Sharma Bhojnalaya",
+      "area": "City Center",
+      "phone": "9000000001",
+      "active": true,
+      "items": [
+        { "id": "sb-veg-thali", "name": "Veg Thali", "description": "Dal, sabzi, roti, rice, salad", "pricePaise": 15000, "isVeg": true, "available": true },
+        { "id": "sb-paneer-butter-masala", "name": "Paneer Butter Masala", "description": "With 2 butter naan", "pricePaise": 22000, "isVeg": true, "available": true },
+        { "id": "sb-dal-makhani-rice", "name": "Dal Makhani + Rice", "description": "Slow-cooked black dal", "pricePaise": 18000, "isVeg": true, "available": true },
+        { "id": "sb-chole-bhature", "name": "Chole Bhature", "description": "2 fluffy bhature", "pricePaise": 12000, "isVeg": true, "available": true }
+      ]
+    },
+    {
+      "id": "biryani-house",
+      "name": "Biryani House",
+      "area": "Station Road",
+      "phone": "9000000002",
+      "active": true,
+      "items": [
+        { "id": "bh-chicken-biryani", "name": "Chicken Biryani", "description": "Hyderabadi dum style, serves 1", "pricePaise": 25000, "isVeg": false, "available": true },
+        { "id": "bh-veg-biryani", "name": "Veg Biryani", "description": "With raita", "pricePaise": 18000, "isVeg": true, "available": true },
+        { "id": "bh-chicken-65", "name": "Chicken 65", "description": "Spicy starter, 8 pcs", "pricePaise": 20000, "isVeg": false, "available": true },
+        { "id": "bh-egg-biryani", "name": "Egg Biryani", "description": "2 eggs, with raita", "pricePaise": 20000, "isVeg": false, "available": true }
+      ]
+    },
+    {
+      "id": "cafe-madras",
+      "name": "Cafe Madras",
+      "area": "MG Road",
+      "phone": "9000000003",
+      "active": true,
+      "items": [
+        { "id": "cm-masala-dosa", "name": "Masala Dosa", "description": "Crispy, with chutney & sambar", "pricePaise": 10000, "isVeg": true, "available": true },
+        { "id": "cm-idli-sambar", "name": "Idli Sambar (4 pc)", "description": "Steamed, with chutney", "pricePaise": 8000, "isVeg": true, "available": true },
+        { "id": "cm-filter-coffee", "name": "Filter Coffee", "description": "Strong, frothy", "pricePaise": 4000, "isVeg": true, "available": true }
+      ]
+    },
+    {
+      "id": "punjabi-tadka",
+      "name": "Punjabi Tadka",
+      "area": "Market Chowk",
+      "phone": "9000000004",
+      "active": true,
+      "items": [
+        { "id": "pt-butter-chicken", "name": "Butter Chicken (Half)", "description": "Creamy tomato gravy", "pricePaise": 28000, "isVeg": false, "available": true },
+        { "id": "pt-amritsari-kulcha", "name": "Amritsari Kulcha", "description": "Stuffed, with chole", "pricePaise": 13000, "isVeg": true, "available": true },
+        { "id": "pt-lassi", "name": "Lassi (Sweet)", "description": "Thick curd, 300ml", "pricePaise": 7000, "isVeg": true, "available": true }
+      ]
+    },
+    {
+      "id": "sweet-corner",
+      "name": "Sweet Corner",
+      "area": "City Center",
+      "phone": "9000000005",
+      "active": true,
+      "items": [
+        { "id": "sc-gulab-jamun", "name": "Gulab Jamun (4 pc)", "description": "Warm, in syrup", "pricePaise": 9000, "isVeg": true, "available": true },
+        { "id": "sc-assorted-sweets", "name": "Assorted Sweets 500g", "description": "Festive mix box", "pricePaise": 30000, "isVeg": true, "available": true },
+        { "id": "sc-samosa", "name": "Samosa (2 pc)", "description": "With green chutney", "pricePaise": 5000, "isVeg": true, "available": true }
+      ]
+    }
+  ]
+}

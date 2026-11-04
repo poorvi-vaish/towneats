@@ -95,18 +95,23 @@ Cut-off behavior: after cut-off, ordering switches to the next slot automaticall
 └─────────────────────────────────────────┘
 ```
 
-## 3. Data Model (minimal — reused by the app later)
+## 3. Data Model (as implemented)
+
+Menu/restaurants live in `web/data/restaurants.json` (validated at build time;
+edit + push to change the menu). Orders/slots live in Postgres (Neon/Supabase):
 
 ```
-Restaurant(id, name, city_address, phone, commission_pct, active)
-MenuItem(id, restaurant_id, name, price, is_veg, available, image_url)
-Slot(id, date, type[lunch|dinner], cutoff_time, pickup_window,
-     delivery_window, capacity, status[open|closed|cancelled|done])
+Slot(id, date, type[LUNCH|DINNER], cutoffAt, deliveryStart, deliveryEnd,
+     capacity, minOrders, status[OPEN|FULL|CLOSED|CANCELLED|COMPLETED])
 Order(id, slot_id, customer_name, phone, area, address, landmark,
-      items_json or OrderItem[], subtotal, delivery_fee, total,
-      payment_status, payment_id, order_status, created_at)
-OrderItem(order_id, menu_item_id, qty, price_at_order)
+      subtotal/delivery_fee/total (paise), status, payment_provider,
+      payment_order_id, payment_id, idempotency_key, created_at)
+OrderItem(order_id, menu_item_id (json id), restaurant_name (snapshot),
+          name_snapshot, price_snapshot, qty)
 ```
+
+Repo: github.com/poorvi-vaish/towneats · CI: GitHub Actions (typecheck+build on PR,
+prisma db push on main) · Deploys: Vercel auto-deploy on push to main.
 
 ## 4. Key Business Rules to Encode
 

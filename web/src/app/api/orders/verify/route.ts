@@ -4,13 +4,12 @@ import { db } from "@/lib/db";
 import { verifyPaymentSignature } from "@/lib/razorpay";
 
 const verifySchema = z
-  .object({
+  .strictObject({
     orderId: z.string().min(1).max(64),
     razorpayOrderId: z.string().min(1).max(64),
     razorpayPaymentId: z.string().min(1).max(64),
     razorpaySignature: z.string().min(1).max(512),
-  })
-  .strict();
+  });
 
 export async function POST(req: NextRequest) {
   let body: unknown;

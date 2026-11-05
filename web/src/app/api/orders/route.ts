@@ -8,20 +8,19 @@ import { razorpayClient, razorpayConfigured } from "@/lib/razorpay";
 
 // Strict schema: unknown fields are rejected.
 const createOrderSchema = z
-  .object({
+  .strictObject({
     slotId: z.string().min(1).max(64),
     customerName: z.string().trim().min(2).max(60),
     phone: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile number"),
     area: z.string().trim().min(2).max(60),
     address: z.string().trim().min(5).max(200),
     landmark: z.string().trim().max(120).optional().default(""),
-    idempotencyKey: z.string().uuid(),
+    idempotencyKey: z.uuid(),
     items: z
-      .array(z.object({ menuItemId: z.string().min(1).max(64), qty: z.number().int().min(1).max(10) }))
+      .array(z.strictObject({ menuItemId: z.string().min(1).max(64), qty: z.number().int().min(1).max(10) }))
       .min(1)
       .max(30),
-  })
-  .strict();
+  });
 
 export async function POST(req: NextRequest) {
   let body: unknown;

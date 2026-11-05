@@ -4,10 +4,9 @@ import { db } from "@/lib/db";
 import { adminAuthorized } from "@/lib/admin";
 
 const patchSchema = z
-  .object({
+  .strictObject({
     action: z.enum(["advance_status", "mark_paid", "cancel"]),
-  })
-  .strict();
+  });
 
 const STATUS_FLOW = [
   "PENDING_PAYMENT",

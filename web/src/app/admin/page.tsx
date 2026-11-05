@@ -30,9 +30,12 @@ export default async function AdminPage({
 
   await ensureSlots();
   const today = istToday();
+  // Show today AND tomorrow — orders placed after tonight's cut-off book
+  // into tomorrow's slots and must not be invisible to ops.
   const slots = await db.slot.findMany({
-    where: { date: today },
+    where: { date: { gte: today } },
     orderBy: { cutoffAt: "asc" },
+    take: 4,
     include: {
       orders: {
         where: { status: { notIn: ["CANCELLED", "REFUNDED"] } },
@@ -44,7 +47,7 @@ export default async function AdminPage({
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-6">
-      <h1 className="text-2xl font-extrabold">Ops dashboard — {today}</h1>
+      <h1 className="text-2xl font-extrabold">Ops dashboard — from {today}</h1>
 
       {slots.map((slot) => {
         const paid = slot.orders.filter((o) => o.status !== "PENDING_PAYMENT");
@@ -71,7 +74,7 @@ export default async function AdminPage({
           <section key={slot.id} className="mt-6 rounded-2xl border border-orange-100 bg-white p-5">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-lg font-bold">
-                {slot.type === "LUNCH" ? "☀️ Lunch" : "🌙 Dinner"} ·{" "}
+                {slot.date} · {slot.type === "LUNCH" ? "☀️ Lunch" : "🌙 Dinner"} ·{" "}
                 <span className={slot.status === "OPEN" ? "text-green-600" : "text-stone-500"}>
                   {slot.status}
                 </span>

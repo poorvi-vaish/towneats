@@ -15,8 +15,8 @@ const SLOT_SCHEDULE: Array<{
   capacity: number;
   minOrders: number;
 }> = [
-  { type: "LUNCH", cutoff: "11:00", deliveryStart: "12:30", deliveryEnd: "14:00", capacity: 20, minOrders: 8 },
-  { type: "DINNER", cutoff: "16:30", deliveryStart: "18:00", deliveryEnd: "20:00", capacity: 20, minOrders: 8 },
+  { type: "LUNCH", cutoff: "11:30", deliveryStart: "12:30", deliveryEnd: "14:00", capacity: 20, minOrders: 8 },
+  { type: "DINNER", cutoff: "17:30", deliveryStart: "18:00", deliveryEnd: "20:00", capacity: 20, minOrders: 8 },
 ];
 
 function istDateString(d: Date): string {

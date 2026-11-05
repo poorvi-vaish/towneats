@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { adminAuthorized } from "@/lib/admin";
+import { notifyNewOrderWhatsApp } from "@/lib/notify";
 
 const patchSchema = z
   .strictObject({
@@ -59,6 +60,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         where: { id },
         data: { status: "CONFIRMED", paidAt: new Date(), paymentId: "manual_upi" },
       });
+      const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
+      if (full) await notifyNewOrderWhatsApp(full);
       return NextResponse.json({ status: updated.status });
     }
     case "cancel": {

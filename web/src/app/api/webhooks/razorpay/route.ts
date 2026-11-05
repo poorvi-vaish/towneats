@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { verifyWebhookSignature } from "@/lib/razorpay";
+import { notifyNewOrderWhatsApp } from "@/lib/notify";
 
 // Optional but recommended in production: configure this URL in the
 // Razorpay dashboard so payments are confirmed server-to-server even if
@@ -22,10 +23,17 @@ export async function POST(req: NextRequest) {
   if (event.event === "payment.captured") {
     const payment = event.payload?.payment?.entity;
     if (payment?.order_id && payment.id) {
-      await db.order.updateMany({
+      const order = await db.order.findFirst({
         where: { paymentOrderId: payment.order_id, status: "PENDING_PAYMENT" },
-        data: { status: "CONFIRMED", paymentId: payment.id, paidAt: new Date() },
+        include: { slot: true, items: true },
       });
+      if (order) {
+        await db.order.update({
+          where: { id: order.id },
+          data: { status: "CONFIRMED", paymentId: payment.id, paidAt: new Date() },
+        });
+        await notifyNewOrderWhatsApp(order);
+      }
     }
   }
   return NextResponse.json({ ok: true });

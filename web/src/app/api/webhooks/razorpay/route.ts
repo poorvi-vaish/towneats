@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { verifyWebhookSignature } from "@/lib/razorpay";
-import { notifyNewOrderWhatsApp } from "@/lib/notify";
+import { notifyNewOrderWhatsApp, notifyCustomerOrderConfirmed } from "@/lib/notify";
 
 // Optional but recommended in production: configure this URL in the
 // Razorpay dashboard so payments are confirmed server-to-server even if
@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
           data: { status: "CONFIRMED", paymentId: payment.id, paidAt: new Date() },
         });
         await notifyNewOrderWhatsApp(order);
+        await notifyCustomerOrderConfirmed(order);
       }
     }
   }

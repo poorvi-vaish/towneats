@@ -13,6 +13,88 @@
 // Production note: outside the sandbox, WhatsApp requires approved message
 // templates (Meta Cloud API or Twilio templates) — revisit when volume justifies.
 
+// ---------------------------------------------------------------------------
+// Customer-facing notifications: Meta WhatsApp Cloud API (production path).
+// No-op until META_WHATSAPP_TOKEN + META_WHATSAPP_PHONE_NUMBER_ID are set.
+// Templates (create in Meta Business Suite → WhatsApp → Message templates,
+// category UTILITY, language English — names must match exactly):
+//
+//   order_confirmed        "Namaste {{1}}! Your TownEats order #{{2}} of ₹{{3}} is confirmed for the {{4}} slot (delivery {{5}}). Track it here: {{6}}"
+//   order_out_for_delivery "Your TownEats order #{{1}} is out for delivery 🛵 It will reach you within the slot window."
+//   order_delivered        "Your TownEats order #{{1}} has been delivered. Enjoy your meal! 🎉 Reply here if anything was wrong."
+//   order_refund           "Your TownEats order #{{1}} was cancelled. Refund of ₹{{2}} will be processed to your payment method within 3-5 days."
+// ---------------------------------------------------------------------------
+
+const META_TOKEN = process.env.META_WHATSAPP_TOKEN;
+const META_PHONE_NUMBER_ID = process.env.META_WHATSAPP_PHONE_NUMBER_ID;
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://towneats-sigma.vercel.app";
+
+function fmtIST(d: Date): string {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(d);
+}
+
+async function sendCustomerTemplate(toPhone10: string, template: string, params: string[]): Promise<void> {
+  if (!META_TOKEN || !META_PHONE_NUMBER_ID) return; // not configured — no-op
+  try {
+    const res = await fetch(`https://graph.facebook.com/v21.0/${META_PHONE_NUMBER_ID}/messages`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${META_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        to: `91${toPhone10}`,
+        type: "template",
+        template: {
+          name: template,
+          language: { code: "en" },
+          components: [
+            { type: "body", parameters: params.map((text) => ({ type: "text", text })) },
+          ],
+        },
+      }),
+    });
+    if (!res.ok) {
+      // Notifications must never break order flow.
+      console.error("meta whatsapp failed", template, res.status, await res.text());
+    }
+  } catch (e) {
+    console.error("meta whatsapp failed", template, e);
+  }
+}
+
+export async function notifyCustomerOrderConfirmed(order: OrderForNotify & { slot: { deliveryStart: Date; deliveryEnd: Date } }): Promise<void> {
+  await sendCustomerTemplate(order.phone, "order_confirmed", [
+    order.customerName.split(" ")[0],
+    order.id.slice(-6).toUpperCase(),
+    (order.totalPaise / 100).toFixed(0),
+    order.slot.type === "LUNCH" ? "Lunch" : "Dinner",
+    `${fmtIST(order.slot.deliveryStart)} – ${fmtIST(order.slot.deliveryEnd)}`,
+    `${SITE_URL}/order/${order.id}`,
+  ]);
+}
+
+export async function notifyCustomerOutForDelivery(order: OrderForNotify): Promise<void> {
+  await sendCustomerTemplate(order.phone, "order_out_for_delivery", [order.id.slice(-6).toUpperCase()]);
+}
+
+export async function notifyCustomerDelivered(order: OrderForNotify): Promise<void> {
+  await sendCustomerTemplate(order.phone, "order_delivered", [order.id.slice(-6).toUpperCase()]);
+}
+
+export async function notifyCustomerRefund(order: OrderForNotify): Promise<void> {
+  await sendCustomerTemplate(order.phone, "order_refund", [
+    order.id.slice(-6).toUpperCase(),
+    (order.totalPaise / 100).toFixed(0),
+  ]);
+}
+
 type OrderForNotify = {
   id: string;
   customerName: string;

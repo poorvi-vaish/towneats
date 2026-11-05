@@ -2,7 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { adminAuthorized } from "@/lib/admin";
-import { notifyNewOrderWhatsApp } from "@/lib/notify";
+import {
+  notifyNewOrderWhatsApp,
+  notifyCustomerOrderConfirmed,
+  notifyCustomerOutForDelivery,
+  notifyCustomerDelivered,
+  notifyCustomerRefund,
+} from "@/lib/notify";
 
 const patchSchema = z
   .strictObject({
@@ -49,6 +55,13 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         return NextResponse.json({ error: "Order is not paid yet." }, { status: 409 });
       }
       const updated = await db.order.update({ where: { id }, data: { status: STATUS_FLOW[idx + 1] } });
+      if (updated.status === "OUT_FOR_DELIVERY" || updated.status === "DELIVERED") {
+        const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
+        if (full) {
+          if (updated.status === "OUT_FOR_DELIVERY") await notifyCustomerOutForDelivery(full);
+          else await notifyCustomerDelivered(full);
+        }
+      }
       return NextResponse.json({ status: updated.status });
     }
     case "mark_paid": {
@@ -61,7 +74,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         data: { status: "CONFIRMED", paidAt: new Date(), paymentId: "manual_upi" },
       });
       const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
-      if (full) await notifyNewOrderWhatsApp(full);
+      if (full) {
+        await notifyNewOrderWhatsApp(full);
+        await notifyCustomerOrderConfirmed(full);
+      }
       return NextResponse.json({ status: updated.status });
     }
     case "cancel": {
@@ -69,6 +85,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         return NextResponse.json({ error: "Order cannot be cancelled." }, { status: 409 });
       }
       const updated = await db.order.update({ where: { id }, data: { status: "CANCELLED" } });
+      if (order.paidAt) {
+        const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
+        if (full) await notifyCustomerRefund(full);
+      }
       return NextResponse.json({ status: updated.status });
     }
     case "mark_refunded": {

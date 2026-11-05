@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { verifyPaymentSignature } from "@/lib/razorpay";
-import { notifyNewOrderWhatsApp } from "@/lib/notify";
+import { notifyNewOrderWhatsApp, notifyCustomerOrderConfirmed } from "@/lib/notify";
 
 const verifySchema = z
   .strictObject({
@@ -46,7 +46,10 @@ export async function POST(req: NextRequest) {
   });
 
   const full = await db.order.findUnique({ where: { id: orderId }, include: { slot: true, items: true } });
-  if (full) await notifyNewOrderWhatsApp(full);
+  if (full) {
+    await notifyNewOrderWhatsApp(full);
+    await notifyCustomerOrderConfirmed(full);
+  }
 
   return NextResponse.json({ ok: true });
 }

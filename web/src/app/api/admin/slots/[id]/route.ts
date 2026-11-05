@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { adminAuthorized } from "@/lib/admin";
+import { notifyCustomerRefund } from "@/lib/notify";
 
 const patchSchema = z
   .strictObject({
@@ -34,6 +35,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   // Cancel the slot and every undelivered order on it, atomically.
   // Paid orders become CANCELLED with paidAt set → they surface in the
   // dashboard's "refund due" list until marked refunded.
+  const affected = await db.order.findMany({
+    where: { slotId: id, status: { notIn: ["DELIVERED", "CANCELLED", "REFUNDED"] }, paidAt: { not: null } },
+    include: { slot: true, items: true },
+  });
   await db.$transaction([
     db.slot.update({ where: { id }, data: { status: "CANCELLED" } }),
     db.order.updateMany({
@@ -41,5 +46,9 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       data: { status: "CANCELLED" },
     }),
   ]);
+  // Notify each paid customer about the refund (≤ slot capacity, so a small loop).
+  for (const o of affected) {
+    await notifyCustomerRefund(o);
+  }
   return NextResponse.json({ status: "CANCELLED" });
 }

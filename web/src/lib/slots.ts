@@ -103,11 +103,19 @@ function toView(slot: Slot, taken: number, now: Date): SlotView {
   };
 }
 
-/** Unpaid orders only hold a spot for 15 minutes, then free it up. */
+/** Unpaid orders hold a spot briefly, then free it up. Manual-UPI customers
+ *  get longer — paying from a bank app is slower than a checkout popup, and
+ *  cancelling someone who already paid is the worst failure mode. */
 export async function releaseStalePending(client: Db = db): Promise<void> {
-  const cutoff = new Date(Date.now() - 15 * 60 * 1000);
+  const now = Date.now();
   await client.order.updateMany({
-    where: { status: "PENDING_PAYMENT", createdAt: { lt: cutoff } },
+    where: {
+      status: "PENDING_PAYMENT",
+      OR: [
+        { paymentProvider: "razorpay", createdAt: { lt: new Date(now - 15 * 60 * 1000) } },
+        { paymentProvider: "manual_upi", createdAt: { lt: new Date(now - 45 * 60 * 1000) } },
+      ],
+    },
     data: { status: "CANCELLED" },
   });
 }
@@ -138,6 +146,10 @@ export async function getSlotBoard(): Promise<{ current: SlotView | null; next: 
 /** Server-side guard used by the order API. Throws with a user-safe message.
  *  Pass the transaction client when called inside a transaction. */
 export async function assertSlotAccepting(slotId: string, client: Db = db): Promise<Slot> {
+  // Lock the slot row so concurrent orders can't both pass the capacity
+  // check (count-then-insert race). Serializes order placement per slot.
+  await client.$executeRaw`SELECT id FROM "Slot" WHERE id = ${slotId} FOR UPDATE`;
+
   const slot = await client.slot.findUnique({ where: { id: slotId } });
   if (!slot) throw new SlotError("This delivery slot no longer exists.");
   const now = new Date();

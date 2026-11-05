@@ -40,10 +40,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Sorry, we don't deliver to this area yet." }, { status: 400 });
   }
 
-  // Idempotency: a retried submission returns the original order.
+  // Idempotency: a retried submission returns the original order — and
+  // completes any payment setup that failed on the first attempt.
   const existing = await db.order.findUnique({ where: { idempotencyKey: input.idempotencyKey } });
   if (existing) {
-    return NextResponse.json(orderResponse(existing));
+    if (existing.status === "CANCELLED") {
+      return NextResponse.json(
+        { error: "This checkout session expired. Please go back and place the order again." },
+        { status: 409 }
+      );
+    }
+    return NextResponse.json(await withPaymentPayload(existing));
   }
 
   try {
@@ -92,29 +99,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Create the Razorpay order outside the DB transaction (network call).
-    if (razorpayConfigured()) {
-      const rzp = razorpayClient();
-      const rzpOrder = await rzp.orders.create({
-        amount: order.totalPaise,
-        currency: "INR",
-        receipt: order.id,
-      });
-      await db.order.update({ where: { id: order.id }, data: { paymentOrderId: rzpOrder.id } });
-      return NextResponse.json({
-        ...orderResponse(order),
-        razorpay: {
-          keyId: process.env.RAZORPAY_KEY_ID,
-          orderId: rzpOrder.id,
-          amountPaise: order.totalPaise,
-        },
-      });
-    }
-
-    // Manual UPI mode: customer pays to our UPI ID, admin confirms payment.
-    return NextResponse.json({
-      ...orderResponse(order),
-      manualUpi: { upiId: process.env.MANUAL_UPI_ID ?? "", amountPaise: order.totalPaise },
-    });
+    return NextResponse.json(await withPaymentPayload(order));
   } catch (e) {
     if (e instanceof SlotError) {
       return NextResponse.json({ error: e.message }, { status: 409 });
@@ -124,6 +109,37 @@ export async function POST(req: NextRequest) {
   }
 }
 
-function orderResponse(order: { id: string; totalPaise: number; status: string }) {
-  return { orderId: order.id, totalPaise: order.totalPaise, status: order.status };
+/** Attach the payment payload (Razorpay or manual UPI) to an order response,
+ *  creating the Razorpay order if a previous attempt failed before it. */
+async function withPaymentPayload(order: {
+  id: string;
+  totalPaise: number;
+  status: string;
+  paymentProvider: string;
+  paymentOrderId: string | null;
+}) {
+  const base = { orderId: order.id, totalPaise: order.totalPaise, status: order.status };
+
+  if (order.paymentProvider === "razorpay" && razorpayConfigured()) {
+    let rzpOrderId = order.paymentOrderId;
+    if (!rzpOrderId) {
+      const rzp = razorpayClient();
+      const rzpOrder = await rzp.orders.create({
+        amount: order.totalPaise,
+        currency: "INR",
+        receipt: order.id,
+      });
+      rzpOrderId = rzpOrder.id;
+      await db.order.update({ where: { id: order.id }, data: { paymentOrderId: rzpOrderId } });
+    }
+    return {
+      ...base,
+      razorpay: { keyId: process.env.RAZORPAY_KEY_ID, orderId: rzpOrderId, amountPaise: order.totalPaise },
+    };
+  }
+
+  return {
+    ...base,
+    manualUpi: { upiId: process.env.MANUAL_UPI_ID ?? "", amountPaise: order.totalPaise },
+  };
 }

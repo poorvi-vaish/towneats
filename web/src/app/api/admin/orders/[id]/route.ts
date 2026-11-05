@@ -5,7 +5,7 @@ import { adminAuthorized } from "@/lib/admin";
 
 const patchSchema = z
   .strictObject({
-    action: z.enum(["advance_status", "mark_paid", "cancel"]),
+    action: z.enum(["advance_status", "mark_paid", "cancel", "mark_refunded"]),
   });
 
 const STATUS_FLOW = [
@@ -66,6 +66,14 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         return NextResponse.json({ error: "Order cannot be cancelled." }, { status: 409 });
       }
       const updated = await db.order.update({ where: { id }, data: { status: "CANCELLED" } });
+      return NextResponse.json({ status: updated.status });
+    }
+    case "mark_refunded": {
+      // Only a cancelled order that actually took money can be refunded.
+      if (order.status !== "CANCELLED" || !order.paidAt) {
+        return NextResponse.json({ error: "Only cancelled paid orders can be marked refunded." }, { status: 409 });
+      }
+      const updated = await db.order.update({ where: { id }, data: { status: "REFUNDED" } });
       return NextResponse.json({ status: updated.status });
     }
   }

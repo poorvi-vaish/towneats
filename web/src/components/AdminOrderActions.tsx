@@ -7,10 +7,12 @@ export function AdminOrderActions({
   orderId,
   status,
   adminKey,
+  refundDue = false,
 }: {
   orderId: string;
   status: string;
   adminKey: string;
+  refundDue?: boolean;
 }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
@@ -33,6 +35,15 @@ export function AdminOrderActions({
 
   return (
     <div className="flex gap-2">
+      {refundDue && (
+        <button
+          disabled={busy}
+          onClick={() => act("mark_refunded")}
+          className="rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
+        >
+          Mark refunded
+        </button>
+      )}
       {status === "PENDING_PAYMENT" && (
         <button
           disabled={busy}

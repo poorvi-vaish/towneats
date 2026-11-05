@@ -4,6 +4,7 @@ import { adminPageAuthorized } from "@/lib/admin";
 import { formatINR } from "@/lib/config";
 import { getRestaurantByName } from "@/lib/menu";
 import { AdminOrderActions } from "@/components/AdminOrderActions";
+import { AdminSlotActions } from "@/components/AdminSlotActions";
 
 export const dynamic = "force-dynamic";
 
@@ -45,9 +46,54 @@ export default async function AdminPage({
     },
   });
 
+  // Paid orders that were cancelled (slot cancelled, ops cancel, expired
+  // after paying) — these owe the customer money until marked refunded.
+  const refundDue = await db.order.findMany({
+    where: { status: "CANCELLED", paidAt: { not: null } },
+    include: { slot: true },
+    orderBy: { paidAt: "desc" },
+    take: 20,
+  });
+
   return (
     <main className="mx-auto max-w-4xl px-4 py-6">
-      <h1 className="text-2xl font-extrabold">Ops dashboard — from {today}</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-extrabold">Ops dashboard — from {today}</h1>
+        <a
+          href={`/api/admin/export?key=${encodeURIComponent(key!)}`}
+          className="rounded-full border border-orange-200 bg-white px-4 py-1.5 text-sm font-semibold text-brand hover:border-brand"
+        >
+          ⬇ Orders CSV
+        </a>
+      </div>
+
+      {refundDue.length > 0 && (
+        <section className="mt-4 rounded-2xl border-2 border-red-300 bg-red-50 p-5">
+          <h2 className="font-bold text-red-800">💸 Refund due ({refundDue.length})</h2>
+          <p className="mt-1 text-sm text-red-700">
+            These customers paid but their orders were cancelled. Refund each one, then mark it.
+          </p>
+          <ul className="mt-3 space-y-2">
+            {refundDue.map((o) => (
+              <li
+                key={o.id}
+                className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white p-3 text-sm"
+              >
+                <div>
+                  <p className="font-bold">
+                    #{o.id.slice(-6).toUpperCase()} · {o.customerName} · {o.phone} ·{" "}
+                    {formatINR(o.totalPaise)}
+                  </p>
+                  <p className="text-xs text-stone-500">
+                    {o.slot.date} {o.slot.type} · paid {o.paidAt?.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
+                  </p>
+                </div>
+                <AdminOrderActions orderId={o.id} status={o.status} adminKey={key!} refundDue />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {slots.map((slot) => {
         const paid = slot.orders.filter((o) => o.status !== "PENDING_PAYMENT");
@@ -83,6 +129,9 @@ export default async function AdminPage({
                 {paid.length}/{slot.capacity} orders · {formatINR(revenue)} · min {slot.minOrders}
                 {paid.length < slot.minOrders ? " ⚠️ below minimum" : " ✅"}
               </p>
+              {(slot.status === "OPEN" || slot.status === "CLOSED") && (
+                <AdminSlotActions slotId={slot.id} adminKey={key!} />
+              )}
             </div>
 
             {/* Rider pickup list */}

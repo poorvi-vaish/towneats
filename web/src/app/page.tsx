@@ -35,7 +35,8 @@ function SlotCard({ slot, highlighted }: { slot: SlotView; highlighted: boolean 
       </p>
       {slot.isOpen ? (
         <p className="mt-1 text-sm text-stone-600">
-          Order within <Countdown targetIso={slot.cutoffAt} />
+          Order by <span className="font-bold text-stone-900">{slot.cutoffLabel}</span>{" "}
+          (<Countdown targetIso={slot.cutoffAt} /> left)
         </p>
       ) : null}
     </div>

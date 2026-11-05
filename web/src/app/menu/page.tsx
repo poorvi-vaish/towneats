@@ -29,7 +29,8 @@ export default async function MenuPage() {
               delivery <span className="font-bold text-stone-900">{slot.deliveryWindow}</span>
             </p>
             <p className="mt-0.5 text-sm text-stone-600">
-              Order within <Countdown targetIso={slot.cutoffAt} /> · {slot.spotsLeft} spots left
+              Order by <span className="font-bold text-stone-900">{slot.cutoffLabel}</span>{" "}
+              (<Countdown targetIso={slot.cutoffAt} /> left) · {slot.spotsLeft} spots left
             </p>
           </div>
         ) : (

@@ -78,6 +78,7 @@ export type SlotView = {
   label: string; // "Lunch" / "Dinner"
   date: string;
   cutoffAt: string;
+  cutoffLabel: string; // "11:30 am"
   deliveryWindow: string; // "12:45 PM – 1:45 PM"
   capacity: number;
   taken: number; // confirmed + pending orders
@@ -96,6 +97,7 @@ function toView(slot: Slot, taken: number, now: Date): SlotView {
     label: slot.type === "LUNCH" ? "Lunch" : "Dinner",
     date: slot.date,
     cutoffAt: slot.cutoffAt.toISOString(),
+    cutoffLabel: fmtTime(slot.cutoffAt),
     deliveryWindow: `${fmtTime(slot.deliveryStart)} – ${fmtTime(slot.deliveryEnd)}`,
     capacity: slot.capacity,
     taken,

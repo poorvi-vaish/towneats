@@ -105,17 +105,21 @@ type OrderForNotify = {
   items: Array<{ nameSnapshot: string; qty: number }>;
 };
 
+// Twilio now requires template-based content for WhatsApp (free-form Body is
+// rejected with error 21654). In the sandbox, use the stock "order" template
+// shown under Try out WhatsApp → Send a message — it looks like:
+//   "Your {{1}} order of {{2}} has shipped and should be delivered on {{3}}. Details: {{4}}"
+// Put its ContentSid (HXxxxxxxxx...) in TWILIO_CONTENT_SID.
+// We map our ops alert onto those 4 variables.
+
 export async function notifyNewOrderWhatsApp(order: OrderForNotify): Promise<void> {
-  return sendOpsWhatsApp(order, `🍽️ *New paid order #${order.id.slice(-6).toUpperCase()}*`);
+  return sendOpsWhatsApp(order, "TownEats ✅ PAID");
 }
 
 /** Manual UPI: customer tapped "I've paid" — ops must verify the credit in
  *  the bank app before marking the order paid. */
 export async function notifyPaymentClaimedWhatsApp(order: OrderForNotify): Promise<void> {
-  return sendOpsWhatsApp(
-    order,
-    `⚠️ *Payment claimed #${order.id.slice(-6).toUpperCase()}* — check your bank app, then mark paid`
-  );
+  return sendOpsWhatsApp(order, "TownEats ⚠️ VERIFY PAYMENT");
 }
 
 async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise<void> {
@@ -123,15 +127,16 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
   const token = process.env.TWILIO_AUTH_TOKEN;
   const from = process.env.TWILIO_WHATSAPP_FROM;
   const to = process.env.WHATSAPP_NOTIFY_TO;
-  if (!sid || !token || !from || !to) return;
+  const contentSid = process.env.TWILIO_CONTENT_SID;
+  if (!sid || !token || !from || !to || !contentSid) return;
 
-  const text = [
-    `${headline} — ₹${(order.totalPaise / 100).toFixed(0)}`,
-    `${order.customerName} · ${order.phone}`,
-    `📍 ${order.area}`,
-    order.items.map((i) => `${i.qty}× ${i.nameSnapshot}`).join(", "),
-    `Slot: ${order.slot.type === "LUNCH" ? "Lunch" : "Dinner"} ${order.slot.date}`,
-  ].join("\n");
+  const items = order.items.map((i) => `${i.qty}× ${i.nameSnapshot}`).join(", ");
+  const variables = {
+    "1": headline,
+    "2": `₹${(order.totalPaise / 100).toFixed(0)} — ${items}`,
+    "3": `${order.slot.type === "LUNCH" ? "Lunch" : "Dinner"} slot ${order.slot.date}`,
+    "4": `#${order.id.slice(-6).toUpperCase()} · ${order.customerName} · ${order.phone} · ${order.area}`,
+  };
 
   try {
     const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
@@ -140,7 +145,12 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
         Authorization: "Basic " + Buffer.from(`${sid}:${token}`).toString("base64"),
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: new URLSearchParams({ From: from, To: to, Body: text }),
+      body: new URLSearchParams({
+        From: from,
+        To: to,
+        ContentSid: contentSid,
+        ContentVariables: JSON.stringify(variables),
+      }),
     });
     if (!res.ok) {
       // Never let a notification failure affect the order flow.

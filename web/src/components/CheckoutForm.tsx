@@ -33,6 +33,109 @@ function loadRazorpayScript(): Promise<boolean> {
   });
 }
 
+function ManualPayScreen({
+  manualPay,
+  onDone,
+}: {
+  manualPay: { upiId: string; amountPaise: number; orderId: string };
+  onDone: () => void;
+}) {
+  // Payment-screen state machine: idle → payClicked (UPI app opened) → claimed.
+  // Pay disables itself once the app is opened; "I've paid" becomes primary.
+  const [payClicked, setPayClicked] = useState(false);
+  const [claiming, setClaiming] = useState(false);
+
+  const storageKey = `pay_${manualPay.orderId}`;
+
+  useEffect(() => {
+    // Survive an accidental page reload after paying in the UPI app.
+    if (sessionStorage.getItem(storageKey)) setPayClicked(true);
+  }, [storageKey]);
+
+  // UPI intent: opens GPay/PhonePe/Paytm with payee, amount and the order
+  // id as the note pre-filled — no typing, clean reconciliation.
+  const upiLink =
+    `upi://pay?pa=${encodeURIComponent(manualPay.upiId)}` +
+    `&pn=${encodeURIComponent("TownEats")}` +
+    `&am=${(manualPay.amountPaise / 100).toFixed(2)}&cu=INR` +
+    `&tn=${encodeURIComponent("Order " + manualPay.orderId.slice(-6).toUpperCase())}`;
+
+  function handlePayClick() {
+    setPayClicked(true);
+    try {
+      sessionStorage.setItem(storageKey, "1");
+    } catch {
+      // private mode etc. — in-memory state still works
+    }
+  }
+
+  async function handlePaid() {
+    setClaiming(true);
+    try {
+      // Tell ops to expect this payment (idempotent server-side).
+      await fetch(`/api/orders/${manualPay.orderId}/claim-payment`, { method: "POST" });
+    } catch {
+      // non-fatal — proceed to tracking regardless
+    }
+    onDone();
+  }
+
+  return (
+    <div className="mt-6 rounded-2xl border border-orange-100 bg-white p-6 text-center">
+      <div className="text-4xl">📲</div>
+      <h2 className="mt-2 text-xl font-extrabold">Pay {formatINR(manualPay.amountPaise)} via UPI</h2>
+
+      {payClicked ? (
+        <>
+          <p className="mt-4 rounded-xl bg-green-50 px-4 py-3 text-sm font-semibold text-green-800">
+            UPI app opened — complete the payment there, then come back here.
+          </p>
+          <button
+            disabled
+            className="mt-4 block w-full cursor-not-allowed rounded-full bg-stone-200 py-4 text-lg font-bold text-stone-500"
+          >
+            ✓ Pay {formatINR(manualPay.amountPaise)} — app opened
+          </button>
+          <a href={upiLink} className="mt-2 inline-block text-xs font-semibold text-brand underline">
+            Payment failed? Reopen the UPI app
+          </a>
+        </>
+      ) : (
+        <>
+          <a
+            href={upiLink}
+            onClick={handlePayClick}
+            className="mt-4 block w-full rounded-full bg-brand py-4 text-lg font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-brand-dark"
+          >
+            Pay {formatINR(manualPay.amountPaise)} in your UPI app
+          </a>
+          <p className="mt-2 text-xs text-stone-500">
+            Opens GPay / PhonePe / Paytm with amount &amp; order note pre-filled.
+          </p>
+        </>
+      )}
+
+      <p className="mt-4 text-sm text-stone-600">
+        On a computer? Send <span className="font-bold">{formatINR(manualPay.amountPaise)}</span> to{" "}
+        <span className="select-all font-bold text-stone-900">{manualPay.upiId}</span> with note{" "}
+        <span className="font-semibold">Order {manualPay.orderId.slice(-6).toUpperCase()}</span>
+      </p>
+
+      <button
+        onClick={handlePaid}
+        disabled={claiming}
+        className={`mt-5 w-full rounded-full py-3 font-bold transition disabled:opacity-50 ${
+          payClicked
+            ? "bg-brand text-lg text-white shadow-lg shadow-orange-200 hover:bg-brand-dark"
+            : "border-2 border-brand text-brand hover:bg-brand hover:text-white"
+        }`}
+      >
+        {claiming ? "Confirming…" : "I've paid — view my order"}
+      </button>
+    </div>
+  );
+}
+
 export function CheckoutForm({
   slotId,
   areas,
@@ -137,51 +240,14 @@ export function CheckoutForm({
   }
 
   if (manualPay) {
-    // UPI intent: opens GPay/PhonePe/Paytm with payee, amount and the order
-    // id as the note pre-filled — no typing, clean reconciliation.
-    const upiLink =
-      `upi://pay?pa=${encodeURIComponent(manualPay.upiId)}` +
-      `&pn=${encodeURIComponent("TownEats")}` +
-      `&am=${(manualPay.amountPaise / 100).toFixed(2)}&cu=INR` +
-      `&tn=${encodeURIComponent("Order " + manualPay.orderId.slice(-6).toUpperCase())}`;
-
     return (
-      <div className="mt-6 rounded-2xl border border-orange-100 bg-white p-6 text-center">
-        <div className="text-4xl">📲</div>
-        <h2 className="mt-2 text-xl font-extrabold">Pay {formatINR(manualPay.amountPaise)} via UPI</h2>
-
-        <a
-          href={upiLink}
-          className="mt-4 block w-full rounded-full bg-brand py-4 text-lg font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-brand-dark"
-        >
-          Pay {formatINR(manualPay.amountPaise)} in your UPI app
-        </a>
-        <p className="mt-2 text-xs text-stone-500">
-          Opens GPay / PhonePe / Paytm with amount &amp; order note pre-filled.
-        </p>
-
-        <p className="mt-4 text-sm text-stone-600">
-          On a computer? Send <span className="font-bold">{formatINR(manualPay.amountPaise)}</span> to{" "}
-          <span className="select-all font-bold text-stone-900">{manualPay.upiId}</span> with note{" "}
-          <span className="font-semibold">Order {manualPay.orderId.slice(-6).toUpperCase()}</span>
-        </p>
-
-        <button
-          onClick={async () => {
-            // Tell ops to expect this payment (idempotent server-side).
-            try {
-              await fetch(`/api/orders/${manualPay.orderId}/claim-payment`, { method: "POST" });
-            } catch {
-              // non-fatal — proceed to tracking regardless
-            }
-            cart.clear();
-            router.push(`/order/${manualPay.orderId}?placed=1`);
-          }}
-          className="mt-5 w-full rounded-full border-2 border-brand py-3 font-bold text-brand hover:bg-brand hover:text-white"
-        >
-          I've paid — view my order
-        </button>
-      </div>
+      <ManualPayScreen
+        manualPay={manualPay}
+        onDone={() => {
+          cart.clear();
+          router.push(`/order/${manualPay.orderId}?placed=1`);
+        }}
+      />
     );
   }
 

@@ -1,0 +1,9 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TownEats icon">
+  <rect width="64" height="64" rx="16" fill="#EA580C"/>
+  <!-- Location pin -->
+  <path d="M32 10C23.7 10 17 16.7 17 25c0 11.2 15 23 15 23s15-11.8 15-23c0-8.3-6.7-15-15-15Z" fill="#FFFFFF"/>
+  <!-- Cloche (serving dome) inside the pin -->
+  <rect x="30.5" y="17.5" width="3" height="3.5" rx="1.5" fill="#EA580C"/>
+  <path d="M22 31a10 10 0 0 1 20 0H22Z" fill="#EA580C"/>
+  <rect x="20" y="33.5" width="24" height="3" rx="1.5" fill="#EA580C"/>
+</svg>

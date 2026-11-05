@@ -39,22 +39,31 @@ export function OrderTracker({ orderId, justPlaced }: { orderId: string; justPla
 
   useEffect(() => {
     let stop = false;
+    let timer: ReturnType<typeof setTimeout>;
+
     async function poll() {
       try {
         const res = await fetch(`/api/orders/${orderId}`);
-        if (res.status === 404) return setNotFound(true);
-        if (!res.ok) return;
-        const data = await res.json();
-        if (!stop) setOrder(data);
+        if (res.status === 404) {
+          setNotFound(true);
+          return; // never poll again for a missing order
+        }
+        if (!res.ok) throw new Error("transient");
+        const data: OrderStatusPayload = await res.json();
+        if (stop) return;
+        setOrder(data);
+        // Terminal state reached — no more polling.
+        if (["DELIVERED", "CANCELLED", "REFUNDED"].includes(data.status)) return;
       } catch {
         // transient network error — keep polling
       }
+      timer = setTimeout(poll, 10000);
     }
+
     poll();
-    const t = setInterval(poll, 10000);
     return () => {
       stop = true;
-      clearInterval(t);
+      clearTimeout(timer);
     };
   }, [orderId]);
 

@@ -36,6 +36,7 @@ export default async function CheckoutPage() {
             slotId={slot.id}
             areas={BUSINESS.servicedAreas}
             deliveryFeePaise={BUSINESS.deliveryFeePaise}
+            minOrderPaise={BUSINESS.minOrderPaise}
           />
         )}
       </div>

@@ -36,6 +36,27 @@ function fmtTime(iso: string): string {
 export function OrderTracker({ orderId, justPlaced }: { orderId: string; justPlaced: boolean }) {
   const [order, setOrder] = useState<OrderStatusPayload | null>(null);
   const [notFound, setNotFound] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
+  const [cancelError, setCancelError] = useState<string | null>(null);
+
+  async function cancelOrder() {
+    if (!confirm("Cancel this order? If you paid, the refund will be processed to your payment method.")) return;
+    setCancelling(true);
+    setCancelError(null);
+    try {
+      const res = await fetch(`/api/orders/${orderId}/cancel`, { method: "POST" });
+      const data = await res.json();
+      if (!res.ok) {
+        setCancelError(data.error ?? "Could not cancel the order.");
+      } else {
+        setOrder((prev) => (prev ? { ...prev, status: data.status } : prev));
+      }
+    } catch {
+      setCancelError("Network error. Please try again.");
+    } finally {
+      setCancelling(false);
+    }
+  }
 
   useEffect(() => {
     let stop = false;
@@ -79,6 +100,7 @@ export function OrderTracker({ orderId, justPlaced }: { orderId: string; justPla
   }
 
   const cancelled = order.status === "CANCELLED" || order.status === "REFUNDED";
+  const cancellable = order.status === "PENDING_PAYMENT" || order.status === "CONFIRMED";
   const currentIdx = STEPS.findIndex((s) => s.key === order.status);
 
   return (
@@ -157,6 +179,20 @@ export function OrderTracker({ orderId, justPlaced }: { orderId: string; justPla
       <Link href="/menu" className="block text-center text-sm font-semibold text-brand">
         ← Order more
       </Link>
+
+      {cancellable && (
+        <div className="text-center">
+          <button
+            onClick={cancelOrder}
+            disabled={cancelling}
+            className="text-sm font-semibold text-red-600 underline underline-offset-2 disabled:opacity-50"
+          >
+            {cancelling ? "Cancelling…" : "Cancel this order"}
+          </button>
+          <p className="mt-1 text-xs text-stone-400">Free cancellation until preparation starts.</p>
+          {cancelError && <p className="mt-1 text-xs font-semibold text-red-600">{cancelError}</p>}
+        </div>
+      )}
     </div>
   );
 }

@@ -61,7 +61,8 @@ export default async function Home() {
       {/* Hero */}
       <section className="mx-auto max-w-3xl px-4 pt-10 pb-6 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-          City food, delivered to <span className="text-brand">{BUSINESS.townName}</span>
+          Hardoi ke chatkaro ka swaad,{" "}
+          <span className="text-brand">ab ghar baithe lo ek saath!</span>
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-lg text-stone-600">
           Order from the city's most-loved restaurants before the cut-off.

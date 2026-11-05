@@ -1,9 +1,10 @@
 // Single source of truth for business configuration.
 
 export const BUSINESS = {
-  townName: process.env.NEXT_PUBLIC_TOWN_NAME ?? "Your Town",
+  townName: process.env.NEXT_PUBLIC_TOWN_NAME ?? "Hardoi",
   cityName: process.env.NEXT_PUBLIC_CITY_NAME ?? "The City",
   deliveryFeePaise: Number(process.env.DELIVERY_FEE_PAISE ?? 5000),
+  minOrderPaise: Number(process.env.MIN_ORDER_PAISE ?? 14900),
   // Serviced delivery areas — checkout rejects anything not in this list.
   servicedAreas: (
     process.env.SERVICED_AREAS ??

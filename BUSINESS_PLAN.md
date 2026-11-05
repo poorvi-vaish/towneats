@@ -22,8 +22,8 @@ Aggregate food orders from town residents in fixed time slots. A rider collects 
 
 | Slot | Order cut-off | Rider (stationed in city) picks up | Rider leaves city | Delivery window |
 |------|---------------|------------------------------------|-------------------|-----------------|
-| Lunch | 11:00 AM | 11:15 AM – 12:15 PM | ~12:15 PM | 12:45 – 1:45 PM |
-| Dinner | 6:00 PM | 6:15 – 7:15 PM | ~7:15 PM | 7:45 – 8:45 PM |
+| Lunch | 11:00 AM | 11:15 AM – 12:00 PM | ~12:00 PM | 12:30 – 2:00 PM |
+| Dinner | 4:30 PM | 4:45 – 5:30 PM | ~5:30 PM | 6:00 – 8:00 PM |
 
 Rider is based in the city all day: receives the consolidated per-restaurant order list at cut-off, coordinates with restaurants directly, collects everything, then drives to town for the delivery run.
 

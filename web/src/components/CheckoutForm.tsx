@@ -37,10 +37,12 @@ export function CheckoutForm({
   slotId,
   areas,
   deliveryFeePaise,
+  minOrderPaise,
 }: {
   slotId: string;
   areas: string[];
   deliveryFeePaise: number;
+  minOrderPaise: number;
 }) {
   const cart = useCart();
   const router = useRouter();
@@ -60,6 +62,7 @@ export function CheckoutForm({
   }, []);
 
   const total = cart.subtotalPaise + deliveryFeePaise;
+  const belowMinimum = cart.count > 0 && cart.subtotalPaise < minOrderPaise;
 
   async function placeOrder() {
     setError(null);
@@ -193,7 +196,7 @@ export function CheckoutForm({
             <span>{formatINR(cart.subtotalPaise)}</span>
           </div>
           <div className="flex justify-between text-stone-600">
-            <span>Delivery fee</span>
+            <span>Convenience fee (incl. GST)</span>
             <span>{formatINR(deliveryFeePaise)}</span>
           </div>
           <div className="flex justify-between text-base font-extrabold">
@@ -201,6 +204,12 @@ export function CheckoutForm({
             <span>{formatINR(total)}</span>
           </div>
         </div>
+        {belowMinimum && (
+          <p className="mt-3 rounded-xl bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-800">
+            Minimum order is {formatINR(minOrderPaise)} — add {formatINR(minOrderPaise - cart.subtotalPaise)} more to
+            place this order.
+          </p>
+        )}
       </section>
 
       {/* Details */}
@@ -256,7 +265,7 @@ export function CheckoutForm({
 
       <button
         onClick={placeOrder}
-        disabled={submitting || cart.count === 0}
+        disabled={submitting || cart.count === 0 || belowMinimum}
         className="w-full rounded-full bg-brand py-4 text-lg font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-50"
       >
         {submitting ? "Placing order…" : `Pay ${formatINR(total)} & place order`}

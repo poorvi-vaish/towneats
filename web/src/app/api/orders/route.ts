@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { BUSINESS } from "@/lib/config";
+import { BUSINESS, formatINR } from "@/lib/config";
 import { assertSlotAccepting, SlotError } from "@/lib/slots";
 import { getOrderableItems } from "@/lib/menu";
 import { razorpayClient, razorpayConfigured } from "@/lib/razorpay";
@@ -66,6 +66,9 @@ export async function POST(req: NextRequest) {
 
       const subtotal = input.items.reduce((sum, i) => sum + menuItems.get(i.menuItemId)!.item.pricePaise * i.qty, 0);
       if (subtotal <= 0) throw new SlotError("Your cart appears to be empty.");
+      if (subtotal < BUSINESS.minOrderPaise) {
+        throw new SlotError(`Minimum order is ${formatINR(BUSINESS.minOrderPaise)}. Please add a few more items.`);
+      }
 
       const total = subtotal + BUSINESS.deliveryFeePaise;
 

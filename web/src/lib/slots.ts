@@ -15,8 +15,8 @@ const SLOT_SCHEDULE: Array<{
   capacity: number;
   minOrders: number;
 }> = [
-  { type: "LUNCH", cutoff: "11:00", deliveryStart: "12:45", deliveryEnd: "13:45", capacity: 20, minOrders: 8 },
-  { type: "DINNER", cutoff: "18:00", deliveryStart: "19:45", deliveryEnd: "20:45", capacity: 20, minOrders: 8 },
+  { type: "LUNCH", cutoff: "11:00", deliveryStart: "12:30", deliveryEnd: "14:00", capacity: 20, minOrders: 8 },
+  { type: "DINNER", cutoff: "16:30", deliveryStart: "18:00", deliveryEnd: "20:00", capacity: 20, minOrders: 8 },
 ];
 
 function istDateString(d: Date): string {
@@ -33,26 +33,34 @@ function atIST(date: string, hhmm: string): Date {
   return new Date(`${date}T${hhmm}:00${IST}`);
 }
 
-/** Create slots for today and tomorrow if they don't exist yet.
- *  Single query — ON CONFLICT DO NOTHING keeps it idempotent. */
+/** Create slots for today and tomorrow, and sync times of existing future
+ *  slots to the current schedule (so schedule edits take effect without a
+ *  manual data migration). */
 export async function ensureSlots(): Promise<void> {
   const now = new Date();
   const dates = [istDateString(now), istDateString(new Date(now.getTime() + 86400000))];
 
-  await db.slot.createMany({
-    data: dates.flatMap((date) =>
-      SLOT_SCHEDULE.map((s) => ({
-        date,
-        type: s.type,
-        cutoffAt: atIST(date, s.cutoff),
-        deliveryStart: atIST(date, s.deliveryStart),
-        deliveryEnd: atIST(date, s.deliveryEnd),
-        capacity: s.capacity,
-        minOrders: s.minOrders,
-      }))
-    ),
-    skipDuplicates: true,
-  });
+  for (const date of dates) {
+    for (const s of SLOT_SCHEDULE) {
+      await db.slot.upsert({
+        where: { date_type: { date, type: s.type } },
+        update: {
+          cutoffAt: atIST(date, s.cutoff),
+          deliveryStart: atIST(date, s.deliveryStart),
+          deliveryEnd: atIST(date, s.deliveryEnd),
+        },
+        create: {
+          date,
+          type: s.type,
+          cutoffAt: atIST(date, s.cutoff),
+          deliveryStart: atIST(date, s.deliveryStart),
+          deliveryEnd: atIST(date, s.deliveryEnd),
+          capacity: s.capacity,
+          minOrders: s.minOrders,
+        },
+      });
+    }
+  }
 }
 
 function fmtTime(d: Date): string {

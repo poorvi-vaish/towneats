@@ -122,6 +122,11 @@ export async function notifyPaymentClaimedWhatsApp(order: OrderForNotify): Promi
   return sendOpsWhatsApp(order, "TownEats ⚠️ VERIFY PAYMENT");
 }
 
+/** Customer cancelled a paid order — ops owes a refund. */
+export async function notifyOrderCancelledWhatsApp(order: OrderForNotify): Promise<void> {
+  return sendOpsWhatsApp(order, "TownEats ❌ CANCELLED — REFUND DUE");
+}
+
 async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise<void> {
   const sid = process.env.TWILIO_ACCOUNT_SID;
   const token = process.env.TWILIO_AUTH_TOKEN;

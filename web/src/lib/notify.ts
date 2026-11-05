@@ -106,6 +106,19 @@ type OrderForNotify = {
 };
 
 export async function notifyNewOrderWhatsApp(order: OrderForNotify): Promise<void> {
+  return sendOpsWhatsApp(order, `🍽️ *New paid order #${order.id.slice(-6).toUpperCase()}*`);
+}
+
+/** Manual UPI: customer tapped "I've paid" — ops must verify the credit in
+ *  the bank app before marking the order paid. */
+export async function notifyPaymentClaimedWhatsApp(order: OrderForNotify): Promise<void> {
+  return sendOpsWhatsApp(
+    order,
+    `⚠️ *Payment claimed #${order.id.slice(-6).toUpperCase()}* — check your bank app, then mark paid`
+  );
+}
+
+async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise<void> {
   const sid = process.env.TWILIO_ACCOUNT_SID;
   const token = process.env.TWILIO_AUTH_TOKEN;
   const from = process.env.TWILIO_WHATSAPP_FROM;
@@ -113,7 +126,7 @@ export async function notifyNewOrderWhatsApp(order: OrderForNotify): Promise<voi
   if (!sid || !token || !from || !to) return;
 
   const text = [
-    `🍽️ *New order #${order.id.slice(-6).toUpperCase()}* — ₹${(order.totalPaise / 100).toFixed(0)}`,
+    `${headline} — ₹${(order.totalPaise / 100).toFixed(0)}`,
     `${order.customerName} · ${order.phone}`,
     `📍 ${order.area}`,
     order.items.map((i) => `${i.qty}× ${i.nameSnapshot}`).join(", "),

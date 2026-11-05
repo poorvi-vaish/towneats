@@ -137,24 +137,47 @@ export function CheckoutForm({
   }
 
   if (manualPay) {
+    // UPI intent: opens GPay/PhonePe/Paytm with payee, amount and the order
+    // id as the note pre-filled — no typing, clean reconciliation.
+    const upiLink =
+      `upi://pay?pa=${encodeURIComponent(manualPay.upiId)}` +
+      `&pn=${encodeURIComponent("TownEats")}` +
+      `&am=${(manualPay.amountPaise / 100).toFixed(2)}&cu=INR` +
+      `&tn=${encodeURIComponent("Order " + manualPay.orderId.slice(-6).toUpperCase())}`;
+
     return (
       <div className="mt-6 rounded-2xl border border-orange-100 bg-white p-6 text-center">
         <div className="text-4xl">📲</div>
         <h2 className="mt-2 text-xl font-extrabold">Pay {formatINR(manualPay.amountPaise)} via UPI</h2>
-        <p className="mt-2 text-stone-600">
-          Send the amount to <span className="select-all font-bold text-stone-900">{manualPay.upiId}</span>{" "}
-          using GPay / PhonePe / Paytm.
+
+        <a
+          href={upiLink}
+          className="mt-4 block w-full rounded-full bg-brand py-4 text-lg font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-brand-dark"
+        >
+          Pay {formatINR(manualPay.amountPaise)} in your UPI app
+        </a>
+        <p className="mt-2 text-xs text-stone-500">
+          Opens GPay / PhonePe / Paytm with amount &amp; order note pre-filled.
         </p>
-        <p className="mt-1 text-sm text-stone-500">
-          Use your phone number <span className="font-semibold">{phone}</span> as the payment note. We
-          confirm payments within minutes and your order status will update automatically.
+
+        <p className="mt-4 text-sm text-stone-600">
+          On a computer? Send <span className="font-bold">{formatINR(manualPay.amountPaise)}</span> to{" "}
+          <span className="select-all font-bold text-stone-900">{manualPay.upiId}</span> with note{" "}
+          <span className="font-semibold">Order {manualPay.orderId.slice(-6).toUpperCase()}</span>
         </p>
+
         <button
-          onClick={() => {
+          onClick={async () => {
+            // Tell ops to expect this payment (idempotent server-side).
+            try {
+              await fetch(`/api/orders/${manualPay.orderId}/claim-payment`, { method: "POST" });
+            } catch {
+              // non-fatal — proceed to tracking regardless
+            }
             cart.clear();
             router.push(`/order/${manualPay.orderId}?placed=1`);
           }}
-          className="mt-5 w-full rounded-full bg-brand py-3 font-bold text-white hover:bg-brand-dark"
+          className="mt-5 w-full rounded-full border-2 border-brand py-3 font-bold text-brand hover:bg-brand hover:text-white"
         >
           I've paid — view my order
         </button>

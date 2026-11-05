@@ -3,7 +3,6 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { adminAuthorized } from "@/lib/admin";
 import {
-  notifyNewOrderWhatsApp,
   notifyCustomerOrderConfirmed,
   notifyCustomerOutForDelivery,
   notifyCustomerDelivered,
@@ -73,11 +72,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         where: { id },
         data: { status: "CONFIRMED", paidAt: new Date(), paymentId: "manual_upi" },
       });
+      // Ops was already pinged when the customer claimed payment; only the
+      // customer confirmation goes out now.
       const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
-      if (full) {
-        await notifyNewOrderWhatsApp(full);
-        await notifyCustomerOrderConfirmed(full);
-      }
+      if (full) await notifyCustomerOrderConfirmed(full);
       return NextResponse.json({ status: updated.status });
     }
     case "cancel": {

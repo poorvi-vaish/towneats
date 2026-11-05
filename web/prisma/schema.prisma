@@ -66,6 +66,7 @@ model Order {
   paymentOrderId   String? // razorpay order id
   paymentId        String? // razorpay payment id
   paidAt           DateTime?
+  paymentClaimedAt DateTime? // manual UPI: customer tapped "I've paid"
   idempotencyKey   String      @unique
   createdAt        DateTime    @default(now())
   items            OrderItem[]

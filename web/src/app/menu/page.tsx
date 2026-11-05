@@ -5,10 +5,16 @@ import { Countdown } from "@/components/Countdown";
 import { getSlotBoard } from "@/lib/slots";
 import { activeRestaurants } from "@/lib/menu";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30;
 
 export default async function MenuPage() {
-  const { current, next } = await getSlotBoard();
+  let current = null as Awaited<ReturnType<typeof getSlotBoard>>["current"];
+  let next = null as Awaited<ReturnType<typeof getSlotBoard>>["next"];
+  try {
+    ({ current, next } = await getSlotBoard());
+  } catch (e) {
+    console.error("slot board unavailable", e);
+  }
   const slot = current ?? next;
   const restaurants = activeRestaurants();
 

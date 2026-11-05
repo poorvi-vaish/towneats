@@ -33,28 +33,26 @@ function atIST(date: string, hhmm: string): Date {
   return new Date(`${date}T${hhmm}:00${IST}`);
 }
 
-/** Create slots for today and tomorrow if they don't exist yet. */
+/** Create slots for today and tomorrow if they don't exist yet.
+ *  Single query — ON CONFLICT DO NOTHING keeps it idempotent. */
 export async function ensureSlots(): Promise<void> {
   const now = new Date();
   const dates = [istDateString(now), istDateString(new Date(now.getTime() + 86400000))];
 
-  for (const date of dates) {
-    for (const s of SLOT_SCHEDULE) {
-      await db.slot.upsert({
-        where: { date_type: { date, type: s.type } },
-        update: {},
-        create: {
-          date,
-          type: s.type,
-          cutoffAt: atIST(date, s.cutoff),
-          deliveryStart: atIST(date, s.deliveryStart),
-          deliveryEnd: atIST(date, s.deliveryEnd),
-          capacity: s.capacity,
-          minOrders: s.minOrders,
-        },
-      });
-    }
-  }
+  await db.slot.createMany({
+    data: dates.flatMap((date) =>
+      SLOT_SCHEDULE.map((s) => ({
+        date,
+        type: s.type,
+        cutoffAt: atIST(date, s.cutoff),
+        deliveryStart: atIST(date, s.deliveryStart),
+        deliveryEnd: atIST(date, s.deliveryEnd),
+        capacity: s.capacity,
+        minOrders: s.minOrders,
+      }))
+    ),
+    skipDuplicates: true,
+  });
 }
 
 function fmtTime(d: Date): string {
@@ -114,31 +112,23 @@ export async function releaseStalePending(client: Db = db): Promise<void> {
   });
 }
 
-async function takenCounts(slotIds: string[]): Promise<Map<string, number>> {
-  await releaseStalePending();
-  const rows = await db.order.groupBy({
-    by: ["slotId"],
-    where: {
-      slotId: { in: slotIds },
-      // Pending-payment orders hold a spot briefly; cancelled/refunded don't.
-      status: { notIn: ["CANCELLED", "REFUNDED"] },
-    },
-    _count: true,
-  });
-  return new Map(rows.map((r) => [r.slotId, r._count]));
-}
-
-/** The slot a new order would go into, plus what's coming next. */
+/** The slot a new order would go into, plus what's coming next.
+ *  Three queries total: create-missing-slots, release-stale, fetch-with-counts. */
 export async function getSlotBoard(): Promise<{ current: SlotView | null; next: SlotView | null }> {
   await ensureSlots();
+  await releaseStalePending();
   const now = new Date();
   const slots = await db.slot.findMany({
     where: { cutoffAt: { gte: new Date(now.getTime() - 6 * 3600000) }, status: { not: "CANCELLED" } },
     orderBy: { cutoffAt: "asc" },
     take: 6,
+    include: {
+      _count: {
+        select: { orders: { where: { status: { notIn: ["CANCELLED", "REFUNDED"] } } } },
+      },
+    },
   });
-  const counts = await takenCounts(slots.map((s) => s.id));
-  const views = slots.map((s) => toView(s, counts.get(s.id) ?? 0, now));
+  const views = slots.map((s) => toView(s, s._count.orders, now));
 
   const current = views.find((v) => v.isOpen) ?? null;
   const next = current ? (views.find((v) => v.id !== current.id && new Date(v.cutoffAt) > now) ?? null) : (views[0] ?? null);

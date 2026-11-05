@@ -4,7 +4,10 @@ import { Countdown } from "@/components/Countdown";
 import { getSlotBoard, type SlotView } from "@/lib/slots";
 import { BUSINESS } from "@/lib/config";
 
-export const dynamic = "force-dynamic";
+// Cache the public page for 30s — slot open/close and countdowns stay
+// accurate (countdown is client-side), and the order API re-validates
+// capacity at checkout, so stale "spots left" can never oversell a slot.
+export const revalidate = 30;
 
 function SlotCard({ slot, highlighted }: { slot: SlotView; highlighted: boolean }) {
   return (
@@ -40,7 +43,15 @@ function SlotCard({ slot, highlighted }: { slot: SlotView; highlighted: boolean 
 }
 
 export default async function Home() {
-  const { current, next } = await getSlotBoard();
+  // Build-time prerender must not depend on DB availability; runtime
+  // revalidation fills in real slot data within 30s.
+  let current = null as Awaited<ReturnType<typeof getSlotBoard>>["current"];
+  let next = null as Awaited<ReturnType<typeof getSlotBoard>>["next"];
+  try {
+    ({ current, next } = await getSlotBoard());
+  } catch (e) {
+    console.error("slot board unavailable", e);
+  }
   const ctaSlot = current ?? next;
 
   return (

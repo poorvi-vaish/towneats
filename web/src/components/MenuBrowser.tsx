@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/components/CartProvider";
 import { formatINR } from "@/lib/config";
 
@@ -35,6 +35,17 @@ function VegBadge({ isVeg }: { isVeg: boolean }) {
 export function MenuBrowser({ restaurants }: { restaurants: RestaurantGroup[] }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const cart = useCart();
+
+  // Self-heal stale carts: the menu is a JSON file and item ids change when
+  // it's replaced — drop cart lines that no longer exist instead of letting
+  // one dead item block the whole order at checkout.
+  useEffect(() => {
+    const valid = new Set(restaurants.flatMap((r) => r.items.map((i) => i.id)));
+    for (const line of cart.lines) {
+      if (!valid.has(line.menuItemId)) cart.remove(line.menuItemId);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="space-y-3">

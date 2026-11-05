@@ -61,7 +61,14 @@ export async function POST(req: NextRequest) {
       const menuIds = [...new Set(input.items.map((i) => i.menuItemId))];
       const menuItems = getOrderableItems(menuIds);
       if (!menuItems) {
-        throw new SlotError("Some items are no longer available. Please review your cart.");
+        // Name the dead items so the customer knows what to remove.
+        const bad = input.items
+          .filter((i) => !getOrderableItems([i.menuItemId]))
+          .map((i) => i.menuItemId);
+        console.warn("order rejected, unknown items:", bad);
+        throw new SlotError(
+          "Some items in your cart are from an older menu. Please go back to the menu — they'll be removed automatically — then re-add what you want."
+        );
       }
 
       const subtotal = input.items.reduce((sum, i) => sum + menuItems.get(i.menuItemId)!.item.pricePaise * i.qty, 0);

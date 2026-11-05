@@ -105,12 +105,15 @@ type OrderForNotify = {
   items: Array<{ nameSnapshot: string; qty: number }>;
 };
 
-// Twilio now requires template-based content for WhatsApp (free-form Body is
-// rejected with error 21654). In the sandbox, use the stock "order" template
-// shown under Try out WhatsApp → Send a message — it looks like:
-//   "Your {{1}} order of {{2}} has shipped and should be delivered on {{3}}. Details: {{4}}"
-// Put its ContentSid (HXxxxxxxxx...) in TWILIO_CONTENT_SID.
-// We map our ops alert onto those 4 variables.
+// Twilio sandbox notes (per Twilio docs):
+//  - Free-form Body messages work while a 24h customer-service window is
+//    open — the window opens whenever your number sends ANY message to the
+//    sandbox number (joining counts). If it lapses, error 21654 is returned.
+//  - Pre-approved stock templates (ContentSid) work any time; get the "order
+//    notification" template's SID from Try out WhatsApp → Send a message.
+//  - Sandbox sessions expire 3 days after joining — re-join with the code.
+// Strategy: free-form first (nicer formatting); on 21654, fall back to the
+// stock template if TWILIO_CONTENT_SID is configured.
 
 export async function notifyNewOrderWhatsApp(order: OrderForNotify): Promise<void> {
   return sendOpsWhatsApp(order, "TownEats ✅ PAID");
@@ -132,36 +135,54 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
   const token = process.env.TWILIO_AUTH_TOKEN;
   const from = process.env.TWILIO_WHATSAPP_FROM;
   const to = process.env.WHATSAPP_NOTIFY_TO;
-  const contentSid = process.env.TWILIO_CONTENT_SID;
-  if (!sid || !token || !from || !to || !contentSid) return;
+  if (!sid || !token || !from || !to) return;
 
+  const amount = `₹${(order.totalPaise / 100).toFixed(0)}`;
   const items = order.items.map((i) => `${i.qty}× ${i.nameSnapshot}`).join(", ");
-  const variables = {
-    "1": headline,
-    "2": `₹${(order.totalPaise / 100).toFixed(0)} — ${items}`,
-    "3": `${order.slot.type === "LUNCH" ? "Lunch" : "Dinner"} slot ${order.slot.date}`,
-    "4": `#${order.id.slice(-6).toUpperCase()} · ${order.customerName} · ${order.phone} · ${order.area}`,
-  };
+  const slot = `${order.slot.type === "LUNCH" ? "Lunch" : "Dinner"} slot ${order.slot.date}`;
+  const details = `#${order.id.slice(-6).toUpperCase()} · ${order.customerName} · ${order.phone} · ${order.area}`;
+
+  const freeform = [headline, `${details} — ${amount}`, items, slot].join("\n");
 
   try {
-    const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
-      method: "POST",
-      headers: {
-        Authorization: "Basic " + Buffer.from(`${sid}:${token}`).toString("base64"),
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
+    // Attempt 1: free-form (works inside the 24h window)
+    const res = await twilioSend(sid, token, { From: from, To: to, Body: freeform });
+    if (res.ok) return;
+
+    const errBody = await res.text();
+    const windowExpired = errBody.includes('"code":21654');
+    const contentSid = process.env.TWILIO_CONTENT_SID;
+
+    if (windowExpired && contentSid) {
+      // Attempt 2: stock template fallback
+      const res2 = await twilioSend(sid, token, {
         From: from,
         To: to,
         ContentSid: contentSid,
-        ContentVariables: JSON.stringify(variables),
-      }),
-    });
-    if (!res.ok) {
-      // Never let a notification failure affect the order flow.
-      console.error("whatsapp notify failed", res.status, await res.text());
+        ContentVariables: JSON.stringify({ "1": headline, "2": `${amount} — ${items}`, "3": slot, "4": details }),
+      });
+      if (!res2.ok) console.error("whatsapp template notify failed", res2.status, await res2.text());
+      return;
     }
+    if (windowExpired) {
+      console.error(
+        "whatsapp notify failed: 24h sandbox window expired. Send any WhatsApp message from your number to the sandbox number to reopen it, or set TWILIO_CONTENT_SID."
+      );
+      return;
+    }
+    console.error("whatsapp notify failed", res.status, errBody);
   } catch (e) {
     console.error("whatsapp notify failed", e);
   }
+}
+
+function twilioSend(sid: string, token: string, params: Record<string, string>): Promise<Response> {
+  return fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
+    method: "POST",
+    headers: {
+      Authorization: "Basic " + Buffer.from(`${sid}:${token}`).toString("base64"),
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(params),
+  });
 }

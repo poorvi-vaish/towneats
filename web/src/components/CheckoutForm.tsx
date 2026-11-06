@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
 import { formatINR } from "@/lib/config";
+import QRCode from "qrcode";
 
 declare global {
   interface Window {
@@ -44,6 +45,7 @@ function ManualPayScreen({
   // Pay disables itself once the app is opened; "I've paid" becomes primary.
   const [payClicked, setPayClicked] = useState(false);
   const [claiming, setClaiming] = useState(false);
+  const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
 
   const storageKey = `pay_${manualPay.orderId}`;
 
@@ -59,6 +61,14 @@ function ManualPayScreen({
     `&pn=${encodeURIComponent("TownEats")}` +
     `&am=${(manualPay.amountPaise / 100).toFixed(2)}&cu=INR` +
     `&tn=${encodeURIComponent("Order " + manualPay.orderId.slice(-6).toUpperCase())}`;
+
+  // QR of the same UPI payload — scanning is more reliable across apps than
+  // the intent link (some apps mangle pre-filled amounts from intents).
+  useEffect(() => {
+    QRCode.toDataURL(upiLink, { width: 280, margin: 1 })
+      .then(setQrDataUrl)
+      .catch(() => setQrDataUrl(null));
+  }, [upiLink]);
 
   function handlePayClick() {
     setPayClicked(true);
@@ -84,6 +94,16 @@ function ManualPayScreen({
     <div className="mt-6 rounded-2xl border border-orange-100 bg-white p-6 text-center">
       <div className="text-4xl">📲</div>
       <h2 className="mt-2 text-xl font-extrabold">Pay {formatINR(manualPay.amountPaise)} via UPI</h2>
+
+      {qrDataUrl && (
+        <div className="mt-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={qrDataUrl} alt="UPI QR code" className="mx-auto rounded-xl border border-orange-100" />
+          <p className="mt-1.5 text-xs text-stone-500">
+            Scan with any UPI app — amount &amp; order note are embedded.
+          </p>
+        </div>
+      )}
 
       {payClicked ? (
         <>

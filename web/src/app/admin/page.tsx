@@ -55,6 +55,22 @@ export default async function AdminPage({
     take: 20,
   });
 
+  // Unconfirmed payments needing a human: customer claimed payment, or the
+  // order is old enough that a QR payment may exist without a claim. Match
+  // against bank credits (note contains "Order #ID") and mark paid / cancel.
+  const needsAttention = await db.order.findMany({
+    where: {
+      status: "PENDING_PAYMENT",
+      OR: [
+        { paymentClaimedAt: { not: null } },
+        { createdAt: { lt: new Date(Date.now() - 10 * 60 * 1000) } },
+      ],
+    },
+    include: { slot: true, items: true },
+    orderBy: { createdAt: "asc" },
+    take: 20,
+  });
+
   return (
     <main className="mx-auto max-w-4xl px-4 py-6">
       <div className="flex items-center justify-between">
@@ -66,6 +82,38 @@ export default async function AdminPage({
           ⬇ Orders CSV
         </a>
       </div>
+
+      {needsAttention.length > 0 && (
+        <section className="mt-4 rounded-2xl border-2 border-amber-300 bg-amber-50 p-5">
+          <h2 className="font-bold text-amber-800">⚠️ Unconfirmed payments ({needsAttention.length})</h2>
+          <p className="mt-1 text-sm text-amber-700">
+            Check your bank app for credits with note &quot;Order #ID&quot;, then mark paid or
+            cancel. Claimed orders never auto-cancel; unclaimed ones only expire while their slot
+            is open.
+          </p>
+          <ul className="mt-3 space-y-2">
+            {needsAttention.map((o) => (
+              <li
+                key={o.id}
+                className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white p-3 text-sm"
+              >
+                <div>
+                  <p className="font-bold">
+                    #{o.id.slice(-6).toUpperCase()} · {o.customerName} · {o.phone} ·{" "}
+                    {formatINR(o.totalPaise)}
+                    {o.paymentClaimedAt ? " · 📣 claimed" : ""}
+                  </p>
+                  <p className="text-xs text-stone-500">
+                    {o.slot.date} {o.slot.type} · placed{" "}
+                    {o.createdAt.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
+                  </p>
+                </div>
+                <AdminOrderActions orderId={o.id} status={o.status} adminKey={key!} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {refundDue.length > 0 && (
         <section className="mt-4 rounded-2xl border-2 border-red-300 bg-red-50 p-5">

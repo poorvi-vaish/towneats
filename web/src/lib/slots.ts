@@ -113,14 +113,18 @@ function toView(slot: Slot, taken: number, now: Date): SlotView {
   };
 }
 
-/** Unpaid orders hold a spot briefly, then free it up. Manual-UPI customers
- *  get longer — paying from a bank app is slower than a checkout popup, and
- *  cancelling someone who already paid is the worst failure mode. */
+/** Unpaid orders hold a spot briefly, then free it up — but only while the
+ *  slot is still open (that's when a held spot costs a sale). After cut-off
+ *  a pending order must NOT silently vanish: the customer may have paid by
+ *  QR without tapping "I've paid", and ops needs it visible to reconcile.
+ *  Claimed payments (paymentClaimedAt set) never auto-cancel. */
 export async function releaseStalePending(client: Db = db): Promise<void> {
   const now = Date.now();
   await client.order.updateMany({
     where: {
       status: "PENDING_PAYMENT",
+      paymentClaimedAt: null,
+      slot: { is: { cutoffAt: { gt: new Date() } } },
       OR: [
         { paymentProvider: "razorpay", createdAt: { lt: new Date(now - 15 * 60 * 1000) } },
         { paymentProvider: "manual_upi", createdAt: { lt: new Date(now - 45 * 60 * 1000) } },

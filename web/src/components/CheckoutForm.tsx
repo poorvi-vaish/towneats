@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
-import { formatINR } from "@/lib/config";
+import { BUSINESS, formatINR } from "@/lib/config";
 import QRCode from "qrcode";
 
 declare global {
@@ -138,6 +138,26 @@ function ManualPayScreen({
       >
         {claiming ? "Confirming…" : "I've paid — view my order"}
       </button>
+
+      {/* Recovery paths if the customer loses this screen after paying */}
+      <div className="mt-4 rounded-xl bg-orange-50 p-3 text-left text-xs text-stone-600">
+        <p className="font-semibold text-stone-700">Save your order page before leaving:</p>
+        <p className="mt-1 select-all break-all font-mono text-stone-800">
+          {typeof window !== "undefined" ? window.location.origin : ""}/order/{manualPay.orderId}
+        </p>
+        <p className="mt-2">
+          Lost the page after paying?{" "}
+          <a
+            className="font-semibold text-brand underline"
+            href={`https://wa.me/${BUSINESS.supportWhatsapp}?text=${encodeURIComponent(
+              "Paid Order #" + manualPay.orderId.slice(-6).toUpperCase()
+            )}`}
+          >
+            WhatsApp us “Paid Order #{manualPay.orderId.slice(-6).toUpperCase()}”
+          </a>{" "}
+          and we'll confirm it.
+        </p>
+      </div>
     </div>
   );
 }

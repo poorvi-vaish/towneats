@@ -119,6 +119,14 @@ function ManualPayScreen({
           <a href={upiLink} className="mt-2 inline-block text-xs font-semibold text-brand underline">
             Payment failed? Reopen the UPI app
           </a>
+          {/* Diagnostic: same link without the amount param, to isolate bank-side
+              rejections of pre-filled amounts. Remove once payments are stable. */}
+          <a
+            href={`upi://pay?pa=${encodeURIComponent(manualPay.upiId)}&pn=${encodeURIComponent("TownEats")}&cu=INR`}
+            className="ml-3 mt-2 inline-block text-xs font-semibold text-stone-500 underline"
+          >
+            Try without pre-filled amount
+          </a>
         </>
       ) : (
         <>

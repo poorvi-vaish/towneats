@@ -235,6 +235,9 @@ export default async function AdminPage({
                       <p className="font-bold">
                         #{o.id.slice(-6).toUpperCase()} · {o.customerName} · {o.phone}
                       </p>
+                      <p className="text-xs text-stone-400">
+                        towneats-sigma.vercel.app/order/{o.id.slice(-6).toUpperCase()}
+                      </p>
                       <p className="text-stone-600">
                         {o.area} — {o.address}
                         {o.landmark ? ` (${o.landmark})` : ""}

@@ -9,10 +9,13 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   if (!id || id.length > 64) {
     return NextResponse.json({ error: "Not found." }, { status: 404 });
   }
-  const order = await db.order.findUnique({
-    where: { id },
-    include: { slot: true, items: true },
-  });
+  // Support the 6-char short id shown to customers (#PLV0OC) so ops can share
+  // typeable links like /order/PLV0OC. Short ids are read-only — write
+  // endpoints (cancel/claim) still require the full id.
+  const isShort = /^[A-Za-z0-9]{6}$/.test(id);
+  const order = isShort
+    ? await db.order.findFirst({ where: { id: { endsWith: id.toLowerCase() } }, include: { slot: true, items: true } })
+    : await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
   if (!order) {
     return NextResponse.json({ error: "Not found." }, { status: 404 });
   }

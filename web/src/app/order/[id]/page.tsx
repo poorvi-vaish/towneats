@@ -12,7 +12,8 @@ export default async function OrderPage({
   const { placed } = await searchParams;
 
   // Validate id shape before it ever touches the DB layer.
-  if (!/^[a-z0-9]{10,40}$/i.test(id)) {
+  // Full cuid, or the 6-char short id from the tracking card.
+  if (!/^[a-z0-9]{6,40}$/i.test(id)) {
     return (
       <main className="min-h-screen">
         <Header />

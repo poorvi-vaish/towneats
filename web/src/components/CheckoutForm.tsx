@@ -113,18 +113,20 @@ function ManualPayScreen({
           UPI app opened — complete the payment there, then come back here.
         </p>
       ) : null}
+      {/* Intent link only helps on phones; on desktop upi:// has no handler */}
       <a
         href={upiLink}
         onClick={handlePayClick}
-        className="mt-3 inline-block text-sm font-semibold text-brand underline"
+        className="mt-3 inline-block text-sm font-semibold text-brand underline md:hidden"
       >
         Or tap to open your UPI app
       </a>
 
-      <p className="mt-4 text-sm text-stone-600">
-        On a computer? Send <span className="font-bold">{formatINR(manualPay.amountPaise)}</span> to{" "}
+      <p className="mt-4 hidden text-sm text-stone-600 md:block">
+        On this computer? Send <span className="font-bold">{formatINR(manualPay.amountPaise)}</span> to{" "}
         <span className="select-all font-bold text-stone-900">{manualPay.upiId}</span> with note{" "}
-        <span className="font-semibold">Order {manualPay.orderId.slice(-6).toUpperCase()}</span>
+        <span className="font-semibold">Order {manualPay.orderId.slice(-6).toUpperCase()}</span>{" "}
+        from your phone's UPI app.
       </p>
 
       <button

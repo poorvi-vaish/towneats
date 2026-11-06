@@ -36,7 +36,8 @@ export default async function CheckoutPage() {
           <CheckoutForm
             slotId={slot.id}
             areas={BUSINESS.servicedAreas}
-            deliveryFeePaise={BUSINESS.deliveryFeePaise}
+            convenienceFeePaise={BUSINESS.convenienceFeePaise}
+            taxPaise={BUSINESS.taxPaise}
             minOrderPaise={BUSINESS.minOrderPaise}
           />
         )}

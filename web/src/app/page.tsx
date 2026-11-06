@@ -86,7 +86,7 @@ export default async function Home() {
             className="block rounded-2xl bg-brand py-4 text-center text-lg font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-brand-dark"
           >
             {current
-              ? `Order for ${current.label} — delivery ${current.deliveryWindow}`
+              ? `Order now — delivery ${current.deliveryWindow}`
               : `Pre-order for ${ctaSlot.label} — delivery ${ctaSlot.deliveryWindow}`}
           </Link>
         )}

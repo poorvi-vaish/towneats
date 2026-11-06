@@ -59,7 +59,7 @@ export function PushSubscribeButton({ orderId }: { orderId: string }) {
         disabled={state === "working"}
         className="rounded-full border-2 border-brand px-6 py-2.5 font-bold text-brand transition hover:bg-brand hover:text-white disabled:opacity-50"
       >
-        {state === "working" ? "Enabling…" : "🔔 Get live updates on this device"}
+        {state === "working" ? "Enabling…" : "🔔 For order updates, tap here"}
       </button>
       {state === "denied" && (
         <p className="mt-1 text-xs text-stone-500">

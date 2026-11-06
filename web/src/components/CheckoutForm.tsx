@@ -139,12 +139,14 @@ function ManualPayScreen({
 export function CheckoutForm({
   slotId,
   areas,
-  deliveryFeePaise,
+  convenienceFeePaise,
+  taxPaise,
   minOrderPaise,
 }: {
   slotId: string;
   areas: string[];
-  deliveryFeePaise: number;
+  convenienceFeePaise: number;
+  taxPaise: number;
   minOrderPaise: number;
 }) {
   const cart = useCart();
@@ -164,7 +166,7 @@ export function CheckoutForm({
     loadRazorpayScript();
   }, []);
 
-  const total = cart.subtotalPaise + deliveryFeePaise;
+  const total = cart.subtotalPaise + convenienceFeePaise + taxPaise;
   const belowMinimum = cart.count > 0 && cart.subtotalPaise < minOrderPaise;
 
   async function placeOrder() {
@@ -285,8 +287,12 @@ export function CheckoutForm({
             <span>{formatINR(cart.subtotalPaise)}</span>
           </div>
           <div className="flex justify-between text-stone-600">
-            <span>Convenience fee (incl. GST)</span>
-            <span>{formatINR(deliveryFeePaise)}</span>
+            <span>Convenience fee</span>
+            <span>{formatINR(convenienceFeePaise)}</span>
+          </div>
+          <div className="flex justify-between text-stone-600">
+            <span>GST &amp; taxes</span>
+            <span>{formatINR(taxPaise)}</span>
           </div>
           <div className="flex justify-between text-base font-extrabold">
             <span>Total</span>

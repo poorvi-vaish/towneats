@@ -190,12 +190,13 @@ export default async function AdminPage({
                 {paid.length}/{slot.capacity} orders · {formatINR(revenue)} · min {slot.minOrders}
                 {paid.length < slot.minOrders ? " ⚠️ below minimum" : " ✅"}
               </p>
-              {(slot.status === "OPEN" || slot.status === "CLOSED") && (
+              {slot.status !== "COMPLETED" && (
                 <AdminSlotActions
                   slotId={slot.id}
                   adminKey={key!}
                   pickupCount={pickupCount}
                   ofdCount={ofdCount}
+                  slotStatus={slot.status}
                 />
               )}
             </div>

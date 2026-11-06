@@ -23,7 +23,9 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
 
   await db.order.update({ where: { id }, data: { paymentClaimedAt: new Date() } });
   const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
-  const notified = full ? await notifyPaymentClaimedWhatsApp(full) : false;
+  const reason = full ? await notifyPaymentClaimedWhatsApp(full) : "order fetch failed";
 
-  return NextResponse.json({ ok: true, notified });
+  // `reason` is exposed for debugging notifications; it contains env var
+  // names / provider error codes only, never secret values.
+  return NextResponse.json({ ok: true, notified: reason === null, reason: reason ?? undefined });
 }

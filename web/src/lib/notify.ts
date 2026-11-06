@@ -115,23 +115,24 @@ type OrderForNotify = {
 // Strategy: free-form first (nicer formatting); on 21654, fall back to the
 // stock template if TWILIO_CONTENT_SID is configured.
 
-export async function notifyNewOrderWhatsApp(order: OrderForNotify): Promise<boolean> {
-  return sendOpsWhatsApp(order, "TownEats ✅ PAID");
+export async function notifyNewOrderWhatsApp(order: OrderForNotify): Promise<void> {
+  await sendOpsWhatsApp(order, "TownEats ✅ PAID");
 }
 
 /** Manual UPI: customer tapped "I've paid" — ops must verify the credit in
- *  the bank app before marking the order paid. */
-export async function notifyPaymentClaimedWhatsApp(order: OrderForNotify): Promise<boolean> {
+ *  the bank app before marking the order paid.
+ *  Returns null on success, or a short reason string on failure/skip. */
+export async function notifyPaymentClaimedWhatsApp(order: OrderForNotify): Promise<string | null> {
   return sendOpsWhatsApp(order, "TownEats ⚠️ VERIFY PAYMENT");
 }
 
 /** Customer cancelled a paid order — ops owes a refund. */
-export async function notifyOrderCancelledWhatsApp(order: OrderForNotify): Promise<boolean> {
-  return sendOpsWhatsApp(order, "TownEats ❌ CANCELLED — REFUND DUE");
+export async function notifyOrderCancelledWhatsApp(order: OrderForNotify): Promise<void> {
+  await sendOpsWhatsApp(order, "TownEats ❌ CANCELLED — REFUND DUE");
 }
 
-/** Returns true if a message was actually handed to Twilio. */
-async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise<boolean> {
+/** Returns null if sent, otherwise a short diagnostic reason. */
+async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise<string | null> {
   const sid = process.env.TWILIO_ACCOUNT_SID;
   const token = process.env.TWILIO_AUTH_TOKEN;
   const from = process.env.TWILIO_WHATSAPP_FROM;
@@ -145,10 +146,11 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
     .filter(([, v]) => !v)
     .map(([k]) => k);
   if (missing.length > 0) {
-    console.warn(`ops whatsapp SKIPPED — missing env vars: ${missing.join(", ")}`);
-    return false;
+    const reason = `missing env: ${missing.join(", ")}`;
+    console.warn(`ops whatsapp SKIPPED — ${reason}`);
+    return reason;
   }
-  if (!sid || !token || !from || !to) return false; // type narrowing (unreachable)
+  if (!sid || !token || !from || !to) return "env check failed"; // type narrowing (unreachable)
 
   const amount = `₹${(order.totalPaise / 100).toFixed(0)}`;
   const items = order.items.map((i) => `${i.qty}× ${i.nameSnapshot}`).join(", ");
@@ -160,7 +162,7 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
   try {
     // Attempt 1: free-form (works inside the 24h window)
     const res = await twilioSend(sid, token, { From: from, To: to, Body: freeform });
-    if (res.ok) return true;
+    if (res.ok) return null;
 
     const errBody = await res.text();
     const windowExpired = errBody.includes('"code":21654');
@@ -175,22 +177,22 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
         ContentVariables: JSON.stringify({ "1": headline, "2": `${amount} — ${items}`, "3": slot, "4": details }),
       });
       if (!res2.ok) {
-        console.error("whatsapp template notify failed", res2.status, await res2.text());
-        return false;
+        const reason = `twilio template error ${res2.status}: ${(await res2.text()).slice(0, 200)}`;
+        console.error("whatsapp template notify failed", reason);
+        return reason;
       }
-      return true;
+      return null;
     }
     if (windowExpired) {
-      console.error(
-        "whatsapp notify failed: 24h sandbox window expired. Send any WhatsApp message from your number to the sandbox number to reopen it, or set TWILIO_CONTENT_SID."
-      );
-      return false;
+      const reason = "sandbox 24h window expired (text the sandbox number to reopen) and no TWILIO_CONTENT_SID set";
+      console.error(`whatsapp notify failed: ${reason}`);
+      return reason;
     }
     console.error("whatsapp notify failed", res.status, errBody);
-    return false;
+    return `twilio error ${res.status}: ${errBody.slice(0, 200)}`;
   } catch (e) {
     console.error("whatsapp notify failed", e);
-    return false;
+    return `exception: ${e instanceof Error ? e.message.slice(0, 200) : "unknown"}`;
   }
 }
 

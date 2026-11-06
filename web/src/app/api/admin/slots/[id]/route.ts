@@ -7,7 +7,7 @@ import { sendOrderStatusPush } from "@/lib/push";
 
 const patchSchema = z
   .strictObject({
-    action: z.enum(["cancel_slot", "bulk_status"]),
+    action: z.enum(["cancel_slot", "reopen_slot", "bulk_status"]),
     to: z.enum(["PICKED_UP", "OUT_FOR_DELIVERY"]).optional(),
   })
   .refine((d) => d.action !== "bulk_status" || d.to !== undefined, {
@@ -40,6 +40,18 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   const slot = await db.slot.findUnique({ where: { id } });
   if (!slot) return NextResponse.json({ error: "Not found." }, { status: 404 });
+
+  if (parsed.data.action === "reopen_slot") {
+    if (slot.status !== "CANCELLED") {
+      return NextResponse.json({ error: "Only cancelled slots can be reopened." }, { status: 409 });
+    }
+    if (slot.cutoffAt < new Date()) {
+      return NextResponse.json({ error: "Cut-off has passed — this slot cannot be reopened." }, { status: 409 });
+    }
+    await db.slot.update({ where: { id }, data: { status: "OPEN" } });
+    return NextResponse.json({ status: "OPEN" });
+  }
+
   if (slot.status === "COMPLETED" || slot.status === "CANCELLED") {
     return NextResponse.json({ error: "Slot is already closed." }, { status: 409 });
   }

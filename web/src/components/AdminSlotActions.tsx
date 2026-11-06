@@ -8,11 +8,13 @@ export function AdminSlotActions({
   adminKey,
   pickupCount,
   ofdCount,
+  slotStatus,
 }: {
   slotId: string;
   adminKey: string;
   pickupCount: number; // orders that can move to PICKED_UP
   ofdCount: number; // orders that can move to OUT_FOR_DELIVERY
+  slotStatus: string;
 }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
@@ -29,6 +31,18 @@ export function AdminSlotActions({
     } finally {
       setBusy(false);
     }
+  }
+
+  if (slotStatus === "CANCELLED") {
+    return (
+      <button
+        disabled={busy}
+        onClick={() => call({ action: "reopen_slot" })}
+        className="rounded-full bg-green-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
+      >
+        ↺ Reopen slot
+      </button>
+    );
   }
 
   async function cancelSlot() {

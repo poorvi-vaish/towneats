@@ -99,11 +99,11 @@ function ManualPayScreen({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={qrDataUrl} alt="UPI QR code" className="mx-auto w-56 rounded-xl border border-orange-100" />
           <p className="mt-2 text-sm font-semibold text-stone-700">
-            Scan with GPay / PhonePe / Paytm — amount &amp; order note are embedded.
+            On the same phone? Screenshot this QR, then in GPay / PhonePe / Paytm choose “Scan QR →
+            open from gallery”.
           </p>
           <p className="mt-1 text-xs text-stone-500">
-            On the same phone? Screenshot this QR, then in your UPI app choose “Scan QR → open from
-            gallery”.
+            On another device? Just scan it — amount &amp; order note are embedded.
           </p>
         </div>
       )}
@@ -117,9 +117,9 @@ function ManualPayScreen({
       <a
         href={upiLink}
         onClick={handlePayClick}
-        className="mt-3 inline-block text-sm font-semibold text-brand underline md:hidden"
+        className="mt-4 block w-full rounded-full border-2 border-brand py-3 font-bold text-brand transition hover:bg-brand hover:text-white md:hidden"
       >
-        Or tap to open your UPI app
+        Click to open your UPI app
       </a>
 
       <p className="mt-4 hidden text-sm text-stone-600 md:block">

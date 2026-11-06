@@ -148,6 +148,7 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
     console.warn(`ops whatsapp SKIPPED — missing env vars: ${missing.join(", ")}`);
     return false;
   }
+  if (!sid || !token || !from || !to) return false; // type narrowing (unreachable)
 
   const amount = `₹${(order.totalPaise / 100).toFixed(0)}`;
   const items = order.items.map((i) => `${i.qty}× ${i.nameSnapshot}`).join(", ");

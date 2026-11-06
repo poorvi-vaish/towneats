@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { verifyPaymentSignature } from "@/lib/razorpay";
 import { notifyNewOrderWhatsApp, notifyCustomerOrderConfirmed } from "@/lib/notify";
+import { sendOrderStatusPush } from "@/lib/push";
 
 const verifySchema = z
   .strictObject({
@@ -49,6 +50,7 @@ export async function POST(req: NextRequest) {
   if (full) {
     await notifyNewOrderWhatsApp(full);
     await notifyCustomerOrderConfirmed(full);
+    await sendOrderStatusPush(full);
   }
 
   return NextResponse.json({ ok: true });

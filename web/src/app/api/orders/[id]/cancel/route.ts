@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { notifyCustomerRefund, notifyOrderCancelledWhatsApp } from "@/lib/notify";
+import { sendOrderStatusPush } from "@/lib/push";
 
 // Customer self-cancellation. Access is gated by knowledge of the order id
 // (same capability model as the tracking page). Allowed until the restaurant
@@ -32,6 +33,7 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     if (full) {
       await notifyCustomerRefund(full);
       await notifyOrderCancelledWhatsApp(full);
+      await sendOrderStatusPush(full);
     }
   }
   return NextResponse.json({ status: updated.status, refundDue: Boolean(order.paidAt) });

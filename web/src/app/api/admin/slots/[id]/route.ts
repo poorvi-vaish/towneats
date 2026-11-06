@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { adminAuthorized } from "@/lib/admin";
 import { notifyCustomerRefund } from "@/lib/notify";
+import { sendOrderStatusPush } from "@/lib/push";
 
 const patchSchema = z
   .strictObject({
@@ -49,6 +50,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   // Notify each paid customer about the refund (≤ slot capacity, so a small loop).
   for (const o of affected) {
     await notifyCustomerRefund(o);
+    await sendOrderStatusPush({ ...o, status: "CANCELLED" });
   }
   return NextResponse.json({ status: "CANCELLED" });
 }

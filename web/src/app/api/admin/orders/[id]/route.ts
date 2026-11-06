@@ -8,6 +8,7 @@ import {
   notifyCustomerDelivered,
   notifyCustomerRefund,
 } from "@/lib/notify";
+import { sendOrderStatusPush } from "@/lib/push";
 
 const patchSchema = z
   .strictObject({
@@ -54,12 +55,11 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         return NextResponse.json({ error: "Order is not paid yet." }, { status: 409 });
       }
       const updated = await db.order.update({ where: { id }, data: { status: STATUS_FLOW[idx + 1] } });
-      if (updated.status === "OUT_FOR_DELIVERY" || updated.status === "DELIVERED") {
-        const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
-        if (full) {
-          if (updated.status === "OUT_FOR_DELIVERY") await notifyCustomerOutForDelivery(full);
-          else await notifyCustomerDelivered(full);
-        }
+      const fullAfter = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
+      if (fullAfter) {
+        if (updated.status === "OUT_FOR_DELIVERY") await notifyCustomerOutForDelivery(fullAfter);
+        else if (updated.status === "DELIVERED") await notifyCustomerDelivered(fullAfter);
+        await sendOrderStatusPush(fullAfter);
       }
       return NextResponse.json({ status: updated.status });
     }
@@ -75,7 +75,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       // Ops was already pinged when the customer claimed payment; only the
       // customer confirmation goes out now.
       const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
-      if (full) await notifyCustomerOrderConfirmed(full);
+      if (full) {
+        await notifyCustomerOrderConfirmed(full);
+        await sendOrderStatusPush(full);
+      }
       return NextResponse.json({ status: updated.status });
     }
     case "cancel": {
@@ -85,7 +88,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       const updated = await db.order.update({ where: { id }, data: { status: "CANCELLED" } });
       if (order.paidAt) {
         const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
-        if (full) await notifyCustomerRefund(full);
+        if (full) {
+          await notifyCustomerRefund(full);
+          await sendOrderStatusPush(full);
+        }
       }
       return NextResponse.json({ status: updated.status });
     }

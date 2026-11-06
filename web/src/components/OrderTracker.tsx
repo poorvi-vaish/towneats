@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { formatINR } from "@/lib/config";
+import { PushSubscribeButton } from "@/components/PushSubscribeButton";
 
 const STEPS = [
   { key: "PENDING_PAYMENT", label: "Awaiting payment", icon: "💳" },
@@ -110,6 +111,8 @@ export function OrderTracker({ orderId, justPlaced }: { orderId: string; justPla
           🎉 Order placed! Save this page link to track your delivery.
         </div>
       )}
+
+      <PushSubscribeButton orderId={order.id} />
 
       <div className="rounded-2xl border border-orange-100 bg-white p-5">
         <div className="flex items-center justify-between">

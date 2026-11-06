@@ -70,6 +70,7 @@ model Order {
   idempotencyKey   String      @unique
   createdAt        DateTime    @default(now())
   items            OrderItem[]
+  pushSubscriptions PushSubscription[]
 
   @@index([slotId, status])
 }
@@ -83,4 +84,14 @@ model OrderItem {
   nameSnapshot   String // frozen at order time
   pricePaiseSnap Int // frozen at order time
   qty            Int
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
 }

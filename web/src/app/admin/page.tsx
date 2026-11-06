@@ -146,6 +146,10 @@ export default async function AdminPage({
       {slots.map((slot) => {
         const paid = slot.orders.filter((o) => o.status !== "PENDING_PAYMENT");
         const revenue = paid.reduce((n, o) => n + o.totalPaise, 0);
+        const pickupCount = slot.orders.filter((o) => ["CONFIRMED", "PREPARING"].includes(o.status)).length;
+        const ofdCount = slot.orders.filter((o) =>
+          ["CONFIRMED", "PREPARING", "PICKED_UP"].includes(o.status)
+        ).length;
 
         // Aggregated pickup list per restaurant
         const byRestaurant = new Map<string, { phone: string; area: string; items: Map<string, number> }>();
@@ -178,7 +182,12 @@ export default async function AdminPage({
                 {paid.length < slot.minOrders ? " ⚠️ below minimum" : " ✅"}
               </p>
               {(slot.status === "OPEN" || slot.status === "CLOSED") && (
-                <AdminSlotActions slotId={slot.id} adminKey={key!} />
+                <AdminSlotActions
+                  slotId={slot.id}
+                  adminKey={key!}
+                  pickupCount={pickupCount}
+                  ofdCount={ofdCount}
+                />
               )}
             </div>
 

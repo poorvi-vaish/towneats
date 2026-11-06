@@ -122,6 +122,17 @@ export default async function Home() {
           </p>
         </div>
       </section>
+
+      {/* Footer — policies (also required by payment-gateway KYC) */}
+      <footer className="border-t border-orange-100">
+        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-4 py-6 text-sm text-stone-500">
+          <a href="/policies/refund" className="hover:text-brand">Refund & Cancellation</a>
+          <a href="/policies/terms" className="hover:text-brand">Terms of Service</a>
+          <a href="/policies/privacy" className="hover:text-brand">Privacy Policy</a>
+          <span>·</span>
+          <span>TownEats · {BUSINESS.townName}</span>
+        </div>
+      </footer>
     </main>
   );
 }

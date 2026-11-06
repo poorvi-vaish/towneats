@@ -75,11 +75,11 @@ function fmtTime(d: Date): string {
 export type SlotView = {
   id: string;
   type: SlotType;
-  label: string; // "Lunch" / "Dinner"
+  dayLabel: string; // "Today" / "Tomorrow" — slots are identified by time, not name
   date: string;
   cutoffAt: string;
   cutoffLabel: string; // "11:30 am"
-  deliveryWindow: string; // "12:45 PM – 1:45 PM"
+  deliveryWindow: string; // "12:30 pm – 2:00 pm"
   capacity: number;
   taken: number; // confirmed + pending orders
   spotsLeft: number;
@@ -91,10 +91,12 @@ function toView(slot: Slot, taken: number, now: Date): SlotView {
   const pastCutoff = now >= slot.cutoffAt;
   const full = taken >= slot.capacity;
   const isOpen = slot.status === "OPEN" && !pastCutoff && !full;
+  const today = istDateString(now);
+  const tomorrow = istDateString(new Date(now.getTime() + 86400000));
   return {
     id: slot.id,
     type: slot.type,
-    label: slot.type === "LUNCH" ? "Lunch" : "Dinner",
+    dayLabel: slot.date === today ? "Today" : slot.date === tomorrow ? "Tomorrow" : slot.date,
     date: slot.date,
     cutoffAt: slot.cutoffAt.toISOString(),
     cutoffLabel: fmtTime(slot.cutoffAt),

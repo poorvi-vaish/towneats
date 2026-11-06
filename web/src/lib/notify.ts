@@ -74,7 +74,7 @@ export async function notifyCustomerOrderConfirmed(order: OrderForNotify & { slo
     order.customerName.split(" ")[0],
     order.id.slice(-6).toUpperCase(),
     (order.totalPaise / 100).toFixed(0),
-    order.slot.type === "LUNCH" ? "Lunch" : "Dinner",
+    order.slot.date,
     `${fmtIST(order.slot.deliveryStart)} – ${fmtIST(order.slot.deliveryEnd)}`,
     `${SITE_URL}/order/${order.id}`,
   ]);
@@ -101,7 +101,7 @@ type OrderForNotify = {
   phone: string;
   area: string;
   totalPaise: number;
-  slot: { date: string; type: string };
+  slot: { date: string; type: string; deliveryStart: Date; deliveryEnd: Date };
   items: Array<{ nameSnapshot: string; qty: number }>;
 };
 
@@ -152,7 +152,7 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
 
   const amount = `₹${(order.totalPaise / 100).toFixed(0)}`;
   const items = order.items.map((i) => `${i.qty}× ${i.nameSnapshot}`).join(", ");
-  const slot = `${order.slot.type === "LUNCH" ? "Lunch" : "Dinner"} slot ${order.slot.date}`;
+  const slot = `delivery ${fmtIST(order.slot.deliveryStart)} – ${fmtIST(order.slot.deliveryEnd)}, ${order.slot.date}`;
   const details = `#${order.id.slice(-6).toUpperCase()} · ${order.customerName} · ${order.phone} · ${order.area}`;
 
   const freeform = [headline, `${details} — ${amount}`, items, slot].join("\n");

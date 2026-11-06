@@ -118,9 +118,7 @@ export function OrderTracker({ orderId, justPlaced }: { orderId: string; justPla
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-stone-500">Order #{order.id.slice(-6).toUpperCase()}</p>
-            <p className="font-bold">
-              {order.slotType === "LUNCH" ? "☀️ Lunch" : "🌙 Dinner"} · {order.area}
-            </p>
+            <p className="font-bold">{order.area}</p>
           </div>
           <p className="font-extrabold">{formatINR(order.totalPaise)}</p>
         </div>

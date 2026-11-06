@@ -12,6 +12,15 @@ function istToday(): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata" }).format(new Date());
 }
 
+function fmtIST(d: Date): string {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(d);
+}
+
 export default async function AdminPage({
   searchParams,
 }: {
@@ -172,7 +181,7 @@ export default async function AdminPage({
           <section key={slot.id} className="mt-6 rounded-2xl border border-orange-100 bg-white p-5">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-lg font-bold">
-                {slot.date} · {slot.type === "LUNCH" ? "☀️ Lunch" : "🌙 Dinner"} ·{" "}
+                {slot.date} · Delivery {fmtIST(slot.deliveryStart)} – {fmtIST(slot.deliveryEnd)} ·{" "}
                 <span className={slot.status === "OPEN" ? "text-green-600" : "text-stone-500"}>
                   {slot.status}
                 </span>

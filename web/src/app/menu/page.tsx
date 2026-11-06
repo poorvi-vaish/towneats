@@ -25,8 +25,7 @@ export default async function MenuPage() {
         {slot ? (
           <div className="mb-4 rounded-2xl border border-orange-100 bg-white p-4">
             <p className="text-sm text-stone-600">
-              Ordering for the <span className="font-bold text-stone-900">{slot.label} slot</span> —
-              delivery <span className="font-bold text-stone-900">{slot.deliveryWindow}</span>
+              Delivery <span className="font-bold text-stone-900">{slot.deliveryWindow}</span>
             </p>
             <p className="mt-0.5 text-sm text-stone-600">
               Order by <span className="font-bold text-stone-900">{slot.cutoffLabel}</span>{" "}

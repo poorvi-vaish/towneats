@@ -17,8 +17,7 @@ export default async function CheckoutPage() {
         {slot ? (
           <div className="mt-3 rounded-2xl border border-orange-100 bg-white p-4 text-sm">
             <p>
-              <span className="font-bold">{slot.label} slot</span> · delivery{" "}
-              <span className="font-bold">{slot.deliveryWindow}</span> · order by{" "}
+              Delivery <span className="font-bold">{slot.deliveryWindow}</span> · order by{" "}
               <span className="font-bold">{slot.cutoffLabel}</span>
             </p>
             <p className="mt-0.5 text-stone-500">

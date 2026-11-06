@@ -18,7 +18,7 @@ function SlotCard({ slot, highlighted }: { slot: SlotView; highlighted: boolean 
     >
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold uppercase tracking-wider text-stone-500">
-          {slot.type === "LUNCH" ? "☀️ Lunch slot" : "🌙 Dinner slot"}
+          {slot.dayLabel}
         </span>
         {slot.isOpen ? (
           <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-semibold text-green-700">
@@ -85,9 +85,8 @@ export default async function Home() {
             href="/menu"
             className="block rounded-2xl bg-brand py-4 text-center text-lg font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-brand-dark"
           >
-            {current
-              ? `Order now — delivery ${current.deliveryWindow}`
-              : `Pre-order for ${ctaSlot.label} — delivery ${ctaSlot.deliveryWindow}`}
+            {`Order now — delivery ${ctaSlot.deliveryWindow}`}
+            {ctaSlot.dayLabel === "Tomorrow" ? " (tomorrow)" : ""}
           </Link>
         )}
       </section>

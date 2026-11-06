@@ -391,7 +391,7 @@ export function CheckoutForm({
         disabled={submitting || cart.count === 0 || belowMinimum}
         className="w-full rounded-full bg-brand py-4 text-lg font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {submitting ? "Placing order…" : `Pay ${formatINR(total)} & place order`}
+        {submitting ? "Placing order…" : `Pay ${formatINR(total)} to place order`}
       </button>
       <p className="text-center text-xs text-stone-500">
         If the slot doesn't reach minimum orders, you get a full automatic refund.

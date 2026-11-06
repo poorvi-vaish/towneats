@@ -92,48 +92,34 @@ function ManualPayScreen({
 
   return (
     <div className="mt-6 rounded-2xl border border-orange-100 bg-white p-6 text-center">
-      <div className="text-4xl">📲</div>
-      <h2 className="mt-2 text-xl font-extrabold">Pay {formatINR(manualPay.amountPaise)} via UPI</h2>
+      <h2 className="text-xl font-extrabold">Pay {formatINR(manualPay.amountPaise)} via UPI</h2>
 
       {qrDataUrl && (
         <div className="mt-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={qrDataUrl} alt="UPI QR code" className="mx-auto rounded-xl border border-orange-100" />
-          <p className="mt-1.5 text-xs text-stone-500">
-            Scan with any UPI app — amount &amp; order note are embedded.
+          <img src={qrDataUrl} alt="UPI QR code" className="mx-auto w-56 rounded-xl border border-orange-100" />
+          <p className="mt-2 text-sm font-semibold text-stone-700">
+            Scan with GPay / PhonePe / Paytm — amount &amp; order note are embedded.
+          </p>
+          <p className="mt-1 text-xs text-stone-500">
+            On the same phone? Screenshot this QR, then in your UPI app choose “Scan QR → open from
+            gallery”.
           </p>
         </div>
       )}
 
       {payClicked ? (
-        <>
-          <p className="mt-4 rounded-xl bg-green-50 px-4 py-3 text-sm font-semibold text-green-800">
-            UPI app opened — complete the payment there, then come back here.
-          </p>
-          <button
-            disabled
-            className="mt-4 block w-full cursor-not-allowed rounded-full bg-stone-200 py-4 text-lg font-bold text-stone-500"
-          >
-            ✓ Pay {formatINR(manualPay.amountPaise)} — app opened
-          </button>
-          <a href={upiLink} className="mt-2 inline-block text-xs font-semibold text-brand underline">
-            Payment failed? Reopen the UPI app
-          </a>
-        </>
-      ) : (
-        <>
-          <a
-            href={upiLink}
-            onClick={handlePayClick}
-            className="mt-4 block w-full rounded-full bg-brand py-4 text-lg font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-brand-dark"
-          >
-            Pay {formatINR(manualPay.amountPaise)} in your UPI app
-          </a>
-          <p className="mt-2 text-xs text-stone-500">
-            Opens GPay / PhonePe / Paytm with amount &amp; order note pre-filled.
-          </p>
-        </>
-      )}
+        <p className="mt-4 rounded-xl bg-green-50 px-4 py-3 text-sm font-semibold text-green-800">
+          UPI app opened — complete the payment there, then come back here.
+        </p>
+      ) : null}
+      <a
+        href={upiLink}
+        onClick={handlePayClick}
+        className="mt-3 inline-block text-sm font-semibold text-brand underline"
+      >
+        Or tap to open your UPI app
+      </a>
 
       <p className="mt-4 text-sm text-stone-600">
         On a computer? Send <span className="font-bold">{formatINR(manualPay.amountPaise)}</span> to{" "}

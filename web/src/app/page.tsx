@@ -48,8 +48,9 @@ export default async function Home() {
   // revalidation fills in real slot data within 30s.
   let current = null as Awaited<ReturnType<typeof getSlotBoard>>["current"];
   let next = null as Awaited<ReturnType<typeof getSlotBoard>>["next"];
+  let slots = [] as Awaited<ReturnType<typeof getSlotBoard>>["slots"];
   try {
-    ({ current, next } = await getSlotBoard());
+    ({ current, next, slots } = await getSlotBoard());
   } catch (e) {
     console.error("slot board unavailable", e);
   }
@@ -71,11 +72,12 @@ export default async function Home() {
         </p>
       </section>
 
-      {/* Slots */}
+      {/* Slots — closed ones stay visible so customers see the full schedule */}
       <section className="mx-auto max-w-3xl space-y-3 px-4">
-        {current && <SlotCard slot={current} highlighted />}
-        {next && <SlotCard slot={next} highlighted={false} />}
-        {!current && !next && (
+        {(slots.length > 0 ? slots : [current, next].filter(Boolean) as typeof slots).map((slot) => (
+          <SlotCard key={slot.id} slot={slot} highlighted={slot.isOpen} />
+        ))}
+        {slots.length === 0 && !current && !next && (
           <p className="rounded-2xl bg-white p-6 text-center text-stone-500">
             No upcoming slots today — check back tomorrow morning.
           </p>

@@ -136,9 +136,13 @@ export async function releaseStalePending(client: Db = db): Promise<void> {
   });
 }
 
-/** The slot a new order would go into, plus what's coming next.
- *  Three queries total: create-missing-slots, release-stale, fetch-with-counts. */
-export async function getSlotBoard(): Promise<{ current: SlotView | null; next: SlotView | null }> {
+/** The slot a new order would go into, plus the full upcoming board so the
+ *  UI can show closed slots too (a vanished slot looks like a bug). */
+export async function getSlotBoard(): Promise<{
+  current: SlotView | null;
+  next: SlotView | null;
+  slots: SlotView[];
+}> {
   await ensureSlots();
   await releaseStalePending();
   const now = new Date();
@@ -156,7 +160,7 @@ export async function getSlotBoard(): Promise<{ current: SlotView | null; next: 
 
   const current = views.find((v) => v.isOpen) ?? null;
   const next = current ? (views.find((v) => v.id !== current.id && new Date(v.cutoffAt) > now) ?? null) : (views[0] ?? null);
-  return { current, next };
+  return { current, next, slots: views };
 }
 
 /** Server-side guard used by the order API. Throws with a user-safe message.

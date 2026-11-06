@@ -18,12 +18,12 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ ok: true }); // already handled — nothing to do
   }
   if (order.paymentClaimedAt) {
-    return NextResponse.json({ ok: true }); // already claimed — don't spam ops
+    return NextResponse.json({ ok: true, notified: "already_claimed" }); // don't spam ops
   }
 
   await db.order.update({ where: { id }, data: { paymentClaimedAt: new Date() } });
   const full = await db.order.findUnique({ where: { id }, include: { slot: true, items: true } });
-  if (full) await notifyPaymentClaimedWhatsApp(full);
+  const notified = full ? await notifyPaymentClaimedWhatsApp(full) : false;
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, notified });
 }

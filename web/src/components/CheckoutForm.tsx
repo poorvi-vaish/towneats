@@ -127,6 +127,12 @@ function ManualPayScreen({
           >
             Try without pre-filled amount
           </a>
+          <a
+            href={`upi://pay?pa=${encodeURIComponent(manualPay.upiId)}`}
+            className="ml-3 mt-2 inline-block text-xs font-semibold text-stone-500 underline"
+          >
+            Bare payee only
+          </a>
         </>
       ) : (
         <>

@@ -1,12 +1,10 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
-import { Countdown } from "@/components/Countdown";
 import { getSlotBoard, type SlotView } from "@/lib/slots";
 import { BUSINESS } from "@/lib/config";
 
-// Cache the public page for 30s — slot open/close and countdowns stay
-// accurate (countdown is client-side), and the order API re-validates
-// capacity at checkout, so stale "spots left" can never oversell a slot.
+// Cache the public page for 30s — the order API re-validates capacity at
+// checkout, so stale "spots left" can never oversell a slot.
 export const revalidate = 30;
 
 function SlotCard({ slot, highlighted }: { slot: SlotView; highlighted: boolean }) {
@@ -35,8 +33,7 @@ function SlotCard({ slot, highlighted }: { slot: SlotView; highlighted: boolean 
       </p>
       {slot.isOpen ? (
         <p className="mt-1 text-sm text-stone-600">
-          Order by <span className="font-bold text-stone-900">{slot.cutoffLabel}</span>{" "}
-          (<Countdown targetIso={slot.cutoffAt} /> left)
+          Order by <span className="font-bold text-stone-900">{slot.cutoffLabel}</span>
         </p>
       ) : null}
     </div>
@@ -63,16 +60,28 @@ export default async function Home() {
       {/* Hero */}
       <section className="mx-auto max-w-3xl px-4 pt-10 pb-6 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-          Ab apni <span className="text-brand">Pihani</span> me paaye{" "}
-          Hardoi ke chatkaro ka swaad
+          Hardoi Ka Zaayka, Ab <span className="text-brand">Pihani</span> Mein!
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-lg font-semibold text-stone-700">
-          Sirf <span className="text-brand">Pihani</span> mein delivery! 📍
+        <p className="mx-auto mt-4 max-w-xl text-lg text-stone-600">
+          Ghar baithe order karein aur apne pasandida khane ka maza lein TownEats ke saath.
         </p>
-        <p className="mx-auto mt-2 max-w-xl text-stone-600">
-          Cut-off se pehle order karo — hum Hardoi ke restaurants se laakar, Pihani mein deliver
-          karenge.
-        </p>
+      </section>
+
+      {/* How it works */}
+      <section className="mx-auto max-w-3xl px-4 pb-8">
+        <div className="grid gap-3 sm:grid-cols-3">
+          {[
+            { icon: "🍽️", title: "1. Order & pay", text: "Cut-off se pehle apni favourite dishes choose karke online pay karo." },
+            { icon: "🛵", title: "2. Hum laate hain", text: "Hamara rider Hardoi ke restaurants se saare orders ek saath collect karta hai." },
+            { icon: "📦", title: "3. Pihani delivery", text: "Aapka khana slot ke time par Pihani mein deliver hota hai." },
+          ].map((s) => (
+            <div key={s.title} className="rounded-2xl border border-orange-100 bg-white p-5">
+              <div className="text-2xl">{s.icon}</div>
+              <p className="mt-2 font-bold">{s.title}</p>
+              <p className="mt-1 text-sm text-stone-600">{s.text}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Slots — closed ones stay visible so customers see the full schedule */}
@@ -96,25 +105,8 @@ export default async function Home() {
         )}
       </section>
 
-      {/* How it works */}
-      <section className="mx-auto max-w-3xl px-4 py-10">
-        <div className="grid gap-3 sm:grid-cols-3">
-          {[
-            { icon: "🍽️", title: "1. Order & pay", text: "Cut-off se pehle apni favourite dishes choose karke online pay karo." },
-            { icon: "🛵", title: "2. Hum laate hain", text: "Hamara rider Hardoi ke restaurants se saare orders ek saath collect karta hai." },
-            { icon: "📦", title: "3. Pihani delivery", text: `Aapka khana slot ke time par Pihani mein deliver hota hai.` },
-          ].map((s) => (
-            <div key={s.title} className="rounded-2xl border border-orange-100 bg-white p-5">
-              <div className="text-2xl">{s.icon}</div>
-              <p className="mt-2 font-bold">{s.title}</p>
-              <p className="mt-1 text-sm text-stone-600">{s.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Areas */}
-      <section className="mx-auto max-w-3xl px-4 pb-16">
+      <section className="mx-auto max-w-3xl px-4 py-10">
         <div className="rounded-2xl border border-orange-100 bg-white p-5">
           <p className="font-bold">📍 Abhi hum sirf yahan deliver karte hain</p>
           <p className="mt-1 text-sm text-stone-600">{BUSINESS.servicedAreas.join(" · ")}</p>

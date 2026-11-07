@@ -1,7 +1,6 @@
 import { Header } from "@/components/Header";
 import { MenuBrowser } from "@/components/MenuBrowser";
 import { CartBar } from "@/components/CartBar";
-import { Countdown } from "@/components/Countdown";
 import { getSlotBoard } from "@/lib/slots";
 import { activeRestaurants } from "@/lib/menu";
 
@@ -28,8 +27,8 @@ export default async function MenuPage() {
               Delivery <span className="font-bold text-stone-900">{slot.deliveryWindow}</span>
             </p>
             <p className="mt-0.5 text-sm text-stone-600">
-              Order by <span className="font-bold text-stone-900">{slot.cutoffLabel}</span>{" "}
-              (<Countdown targetIso={slot.cutoffAt} /> left) · {slot.spotsLeft} spots left
+              Order by <span className="font-bold text-stone-900">{slot.cutoffLabel}</span> ·{" "}
+              {slot.spotsLeft} spots left
             </p>
           </div>
         ) : (

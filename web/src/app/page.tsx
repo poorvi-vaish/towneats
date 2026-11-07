@@ -63,12 +63,15 @@ export default async function Home() {
       {/* Hero */}
       <section className="mx-auto max-w-3xl px-4 pt-10 pb-6 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-          Hardoi ke chatkaro ka swaad,{" "}
-          <span className="text-brand">ab ghar baithe lo ek saath!</span>
+          Ab apni <span className="text-brand">Pihani</span> me paaye{" "}
+          Hardoi ke chatkaro ka swaad
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-lg text-stone-600">
-          Order from the city's most-loved restaurants before the cut-off.
-          Our rider picks up everything in one trip and delivers in a fixed window.
+        <p className="mx-auto mt-4 max-w-xl text-lg font-semibold text-stone-700">
+          Sirf <span className="text-brand">Pihani</span> mein delivery! 📍
+        </p>
+        <p className="mx-auto mt-2 max-w-xl text-stone-600">
+          Cut-off se pehle order karo — hum Hardoi ke restaurants se laakar, Pihani mein deliver
+          karenge.
         </p>
       </section>
 
@@ -97,9 +100,9 @@ export default async function Home() {
       <section className="mx-auto max-w-3xl px-4 py-10">
         <div className="grid gap-3 sm:grid-cols-3">
           {[
-            { icon: "🍽️", title: "1. Order & pay", text: "Pick your favourites and pay online before the slot cut-off." },
-            { icon: "🛵", title: "2. We collect", text: "Our rider in the city picks up all orders from the restaurants." },
-            { icon: "📦", title: "3. Delivered", text: `Your food arrives in ${BUSINESS.townName} within the slot window.` },
+            { icon: "🍽️", title: "1. Order & pay", text: "Cut-off se pehle apni favourite dishes choose karke online pay karo." },
+            { icon: "🛵", title: "2. Hum laate hain", text: "Hamara rider Hardoi ke restaurants se saare orders ek saath collect karta hai." },
+            { icon: "📦", title: "3. Pihani delivery", text: `Aapka khana slot ke time par Pihani mein deliver hota hai.` },
           ].map((s) => (
             <div key={s.title} className="rounded-2xl border border-orange-100 bg-white p-5">
               <div className="text-2xl">{s.icon}</div>
@@ -113,7 +116,7 @@ export default async function Home() {
       {/* Areas */}
       <section className="mx-auto max-w-3xl px-4 pb-16">
         <div className="rounded-2xl border border-orange-100 bg-white p-5">
-          <p className="font-bold">📍 We currently deliver to</p>
+          <p className="font-bold">📍 Abhi hum sirf yahan deliver karte hain</p>
           <p className="mt-1 text-sm text-stone-600">{BUSINESS.servicedAreas.join(" · ")}</p>
           <p className="mt-3 text-sm text-stone-600">
             Questions? WhatsApp us at{" "}

@@ -5,6 +5,7 @@ import { BUSINESS, formatINR } from "@/lib/config";
 import { assertSlotAccepting, SlotError } from "@/lib/slots";
 import { getOrderableItems } from "@/lib/menu";
 import { razorpayClient, razorpayConfigured } from "@/lib/razorpay";
+import { notifyOrderPlacedWhatsApp } from "@/lib/notify";
 
 // Strict schema: unknown fields are rejected.
 const createOrderSchema = z
@@ -109,6 +110,11 @@ export async function POST(req: NextRequest) {
     });
 
     // Create the Razorpay order outside the DB transaction (network call).
+    // In manual-UPI mode, ping ops at placement so unpaid orders are visible.
+    if (!razorpayConfigured()) {
+      const full = await db.order.findUnique({ where: { id: order.id }, include: { slot: true, items: true } });
+      if (full) await notifyOrderPlacedWhatsApp(full);
+    }
     return NextResponse.json(await withPaymentPayload(order));
   } catch (e) {
     if (e instanceof SlotError) {

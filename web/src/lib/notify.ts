@@ -115,6 +115,12 @@ type OrderForNotify = {
 // Strategy: free-form first (nicer formatting); on 21654, fall back to the
 // stock template if TWILIO_CONTENT_SID is configured.
 
+/** Order just created (manual UPI mode) — awaiting payment. Gives ops
+ *  immediate awareness even if the customer never taps "I've paid". */
+export async function notifyOrderPlacedWhatsApp(order: OrderForNotify): Promise<void> {
+  await sendOpsWhatsApp(order, "TownEats 🆕 NEW ORDER (awaiting payment)");
+}
+
 export async function notifyNewOrderWhatsApp(order: OrderForNotify): Promise<void> {
   await sendOpsWhatsApp(order, "TownEats ✅ PAID");
 }

@@ -161,9 +161,11 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
   const amount = `₹${(order.totalPaise / 100).toFixed(0)}`;
   const items = order.items.map((i) => `${i.qty}× ${i.nameSnapshot}`).join(", ");
   const slot = `delivery ${fmtIST(order.slot.deliveryStart)} – ${fmtIST(order.slot.deliveryEnd)}, ${order.slot.date}`;
-  const details = `#${order.id.slice(-6).toUpperCase()} · ${order.customerName} · ${order.phone} · ${order.area}`;
+  const shortId = order.id.slice(-6).toUpperCase();
+  const details = `#${shortId} · ${order.customerName} · ${order.phone} · ${order.area}`;
+  const link = `${SITE_URL}/order/${shortId}`;
 
-  const freeform = [headline, `${details} — ${amount}`, items, slot].join("\n");
+  const freeform = [headline, `${details} — ${amount}`, items, slot, link].join("\n");
 
   try {
     // Attempt 1: free-form (works inside the 24h window)
@@ -180,7 +182,7 @@ async function sendOpsWhatsApp(order: OrderForNotify, headline: string): Promise
         From: from,
         To: to,
         ContentSid: contentSid,
-        ContentVariables: JSON.stringify({ "1": headline, "2": `${amount} — ${items}`, "3": slot, "4": details }),
+        ContentVariables: JSON.stringify({ "1": headline, "2": `${amount} — ${items}`, "3": slot, "4": `${details} · ${link}` }),
       });
       if (!res2.ok) {
         const reason = `twilio template error ${res2.status}: ${(await res2.text()).slice(0, 200)}`;

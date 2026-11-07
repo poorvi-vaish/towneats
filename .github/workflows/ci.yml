@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
-    branches: [main]
+    branches: [main, develop]
 
 jobs:
   build:
@@ -38,7 +38,7 @@ jobs:
   db-push:
     name: Sync database schema
     needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -55,8 +55,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Push schema to production database
+      - name: Push schema to the right database
         run: npx prisma db push --skip-generate
         env:
-          # GitHub → Settings → Secrets → Actions → DATABASE_URL
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          # main → production DB (DATABASE_URL); develop → pre-prod Neon branch (DATABASE_URL_DEV)
+          # GitHub → Settings → Secrets → Actions
+          DATABASE_URL: ${{ github.ref == 'refs/heads/develop' && secrets.DATABASE_URL_DEV || secrets.DATABASE_URL }}

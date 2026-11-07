@@ -1094,41 +1094,153 @@
       "items": [
         {
           "id": "moti-mahal-delux-1",
-          "name": "Hariyali kabab",
-          "description": "",
-          "pricePaise": 27400,
+          "name": "Loaded Cheesy Fries",
+          "description": "Snacks",
+          "pricePaise": 22900,
           "isVeg": true,
           "available": true
         },
         {
           "id": "moti-mahal-delux-2",
-          "name": "Seekh kabab",
-          "description": "",
-          "pricePaise": 27400,
+          "name": "Paneer Pakora",
+          "description": "Snacks",
+          "pricePaise": 24900,
           "isVeg": true,
           "available": true
         },
         {
           "id": "moti-mahal-delux-3",
-          "name": "Dahi kabab",
-          "description": "",
-          "pricePaise": 32900,
+          "name": "Veg Spring Roll",
+          "description": "Snacks",
+          "pricePaise": 24900,
           "isVeg": true,
           "available": true
         },
         {
           "id": "moti-mahal-delux-4",
-          "name": "Subs kabab",
-          "description": "",
-          "pricePaise": 30700,
+          "name": "Chilli Potato",
+          "description": "Snacks",
+          "pricePaise": 24900,
           "isVeg": true,
           "available": true
         },
         {
           "id": "moti-mahal-delux-5",
-          "name": "Tandoori aloo",
+          "name": "Chana Chaat",
+          "description": "Snacks",
+          "pricePaise": 10900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-6",
+          "name": "Karare Aloo Ki Chaat",
+          "description": "Snacks",
+          "pricePaise": 10900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-7",
+          "name": "Paneer Butter Masala",
           "description": "",
           "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-8",
+          "name": "Main Course Paneer",
+          "description": "",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-9",
+          "name": "Ginger Capsicum Fried Rice (Veg)",
+          "description": "",
+          "pricePaise": 24900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-10",
+          "name": "Fried Rice (Veg)",
+          "description": "Biryani & Rice",
+          "pricePaise": 24900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-11",
+          "name": "Chilli Garlic Fried Rice (Veg)",
+          "description": "Biryani & Rice",
+          "pricePaise": 24900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-12",
+          "name": "Chilli Paneer Dry",
+          "description": "Chinese Starters",
+          "pricePaise": 30900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-13",
+          "name": "Paneer Manchurian Dry",
+          "description": "Chinese Starters",
+          "pricePaise": 30900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-14",
+          "name": "Cottage Cheese 65",
+          "description": "Chinese Starters",
+          "pricePaise": 30900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-15",
+          "name": "Cottage Cheese Salt N Pepper",
+          "description": "Chinese Starters",
+          "pricePaise": 30900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-16",
+          "name": "Szechwan Cottage Cheese",
+          "description": "Chinese Starters",
+          "pricePaise": 34900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-17",
+          "name": "Mushroom Salt N Pepper",
+          "description": "Chinese Starters",
+          "pricePaise": 29900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-18",
+          "name": "Afghani Soya Chaap",
+          "description": "Chinese Starters",
+          "pricePaise": 27900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "moti-mahal-delux-19",
+          "name": "American Veg Choupsuey",
+          "description": "Chinese Starters",
+          "pricePaise": 27900,
           "isVeg": true,
           "available": true
         }
@@ -1739,6 +1851,2778 @@
           "name": "Black forest cake eggless (500g)",
           "description": "",
           "pricePaise": 99000,
+          "isVeg": true,
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "mircha-ram",
+      "name": "Mircha ram",
+      "area": "City",
+      "phone": "9000000000",
+      "active": true,
+      "items": [
+        {
+          "id": "mircha-ram-1",
+          "name": "Manchurian Dry",
+          "description": "",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-2",
+          "name": "Veg Chowmein",
+          "description": "",
+          "pricePaise": 10900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-3",
+          "name": "Chilli Potato Dry",
+          "description": "",
+          "pricePaise": 15900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-4",
+          "name": "Chilli Potato Gravy",
+          "description": "",
+          "pricePaise": 18900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-5",
+          "name": "Paneer Stick",
+          "description": "",
+          "pricePaise": 13900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-6",
+          "name": "Paneer Patties",
+          "description": "",
+          "pricePaise": 5900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-7",
+          "name": "Normal Gujiya",
+          "description": "Sweets",
+          "pricePaise": 45700,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-8",
+          "name": "Kaju Katli",
+          "description": "Sweets",
+          "pricePaise": 77000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-9",
+          "name": "Kesar Gujiya",
+          "description": "Sweets",
+          "pricePaise": 48700,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-10",
+          "name": "Boondi Laddu",
+          "description": "Sweets",
+          "pricePaise": 35000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-11",
+          "name": "Kaju Paan",
+          "description": "Sweets",
+          "pricePaise": 98000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-12",
+          "name": "Special Chamcham",
+          "description": "Sweets",
+          "pricePaise": 35000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-13",
+          "name": "Orange Chamcham",
+          "description": "Sweets",
+          "pricePaise": 35000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-14",
+          "name": "Khoya Pista Barfi",
+          "description": "Sweets",
+          "pricePaise": 45500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-15",
+          "name": "White Peda Mini",
+          "description": "Sweets",
+          "pricePaise": 45500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-16",
+          "name": "White Peda Big",
+          "description": "Sweets",
+          "pricePaise": 45500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-17",
+          "name": "Brown Peda Mini",
+          "description": "Sweets",
+          "pricePaise": 45500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-18",
+          "name": "Brown Peda Big",
+          "description": "Sweets",
+          "pricePaise": 45500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-19",
+          "name": "Dry Fruit Barfi",
+          "description": "Sweets",
+          "pricePaise": 98000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-20",
+          "name": "Kaju Laddu",
+          "description": "Sweets",
+          "pricePaise": 77000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-21",
+          "name": "Cream Dona",
+          "description": "Sweets",
+          "pricePaise": 42000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-22",
+          "name": "Khoya Paval",
+          "description": "Sweets",
+          "pricePaise": 45500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-23",
+          "name": "Mewa Papdi",
+          "description": "Sweets",
+          "pricePaise": 45500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-24",
+          "name": "Butter Scotch Barfi",
+          "description": "Sweets",
+          "pricePaise": 45500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-25",
+          "name": "Matar Paneer Sabji",
+          "description": "North Indian food and snacks",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-26",
+          "name": "Paneer Bhatura",
+          "description": "North Indian food and snacks",
+          "pricePaise": 14500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-27",
+          "name": "Kheer",
+          "description": "North Indian food and snacks",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-28",
+          "name": "Puri Sabji Chola",
+          "description": "North Indian food and snacks",
+          "pricePaise": 11900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-29",
+          "name": "Dahi Vada",
+          "description": "North Indian food and snacks",
+          "pricePaise": 8900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-30",
+          "name": "Paneer Puri Sabji",
+          "description": "North Indian food and snacks",
+          "pricePaise": 14500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-31",
+          "name": "Rasmalai",
+          "description": "North Indian food and snacks",
+          "pricePaise": 6900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-32",
+          "name": "Chola Sabji",
+          "description": "North Indian food and snacks",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-33",
+          "name": "Pav Bhaji",
+          "description": "North Indian food and snacks",
+          "pricePaise": 12500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-34",
+          "name": "Jalebi (1 kg)",
+          "description": "North Indian food and snacks",
+          "pricePaise": 15900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-35",
+          "name": "Dahi (1 kg)",
+          "description": "North Indian food and snacks",
+          "pricePaise": 16900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-36",
+          "name": "Coconut Masala Dosa",
+          "description": "South Indian",
+          "pricePaise": 18900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-37",
+          "name": "Mircharam Special Dosa",
+          "description": "South Indian",
+          "pricePaise": 21900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-38",
+          "name": "Butter Cheese Dosa",
+          "description": "South Indian",
+          "pricePaise": 21900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-39",
+          "name": "Pizza Dosa",
+          "description": "South Indian",
+          "pricePaise": 22900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-40",
+          "name": "Noodles Dosa",
+          "description": "South Indian",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-41",
+          "name": "Rava Dosa",
+          "description": "South Indian",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-42",
+          "name": "Rava Onion Dosa",
+          "description": "South Indian",
+          "pricePaise": 20900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-43",
+          "name": "Rava Cheese Dosa",
+          "description": "South Indian",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-44",
+          "name": "Plain Rava",
+          "description": "South Indian",
+          "pricePaise": 15900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-45",
+          "name": "Utthapam Masala",
+          "description": "South Indian",
+          "pricePaise": 14900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-46",
+          "name": "Utthapam Mix Veg",
+          "description": "South Indian",
+          "pricePaise": 16900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-47",
+          "name": "Paneer Utthapam",
+          "description": "South Indian",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-48",
+          "name": "Mushroom Utthapam",
+          "description": "South Indian",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-49",
+          "name": "Sambhar Vada",
+          "description": "South Indian",
+          "pricePaise": 8500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-50",
+          "name": "Fried Idli",
+          "description": "South Indian",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-51",
+          "name": "Idli (2 Pieces)",
+          "description": "South Indian",
+          "pricePaise": 5000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-52",
+          "name": "Vanilla Cake",
+          "description": "Cakes",
+          "pricePaise": 59900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-53",
+          "name": "Strawberry Cake",
+          "description": "Cakes",
+          "pricePaise": 60900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-54",
+          "name": "Black Forest Cake",
+          "description": "Cakes",
+          "pricePaise": 61900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-55",
+          "name": "Pineapple Cake",
+          "description": "Cakes",
+          "pricePaise": 59900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-56",
+          "name": "Chocolate Cake",
+          "description": "Cakes",
+          "pricePaise": 59900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-57",
+          "name": "Choco Chip Cake",
+          "description": "Cakes",
+          "pricePaise": 63900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-58",
+          "name": "White Forest",
+          "description": "Pastries and bakery items",
+          "pricePaise": 8000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-59",
+          "name": "Red Velvet",
+          "description": "Pastries and bakery items",
+          "pricePaise": 8500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-60",
+          "name": "Rainbow",
+          "description": "Pastries and bakery items",
+          "pricePaise": 7500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-61",
+          "name": "Doughnut",
+          "description": "Pastries and bakery items",
+          "pricePaise": 7500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-62",
+          "name": "Lollipop",
+          "description": "Pastries and bakery items",
+          "pricePaise": 4900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-63",
+          "name": "Creamroll",
+          "description": "Pastries and bakery items",
+          "pricePaise": 4900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-64",
+          "name": "Chocolate Pudding",
+          "description": "Pastries and bakery items",
+          "pricePaise": 8500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-65",
+          "name": "Mango Pudding",
+          "description": "Pastries and bakery items",
+          "pricePaise": 8500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-66",
+          "name": "Paneer Momos (4 Pieces)",
+          "description": "Chinese and fast food",
+          "pricePaise": 6000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-67",
+          "name": "Chilli Paneer Gravy",
+          "description": "Chinese and fast food",
+          "pricePaise": 27900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-68",
+          "name": "Paneer Chowmein",
+          "description": "Chinese and fast food",
+          "pricePaise": 12500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-69",
+          "name": "Plain Sandwich",
+          "description": "Sandwiches and burgers",
+          "pricePaise": 6900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-70",
+          "name": "Burger",
+          "description": "Sandwiches and burgers",
+          "pricePaise": 8900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-71",
+          "name": "Mozzarella Sandwich",
+          "description": "Sandwiches and burgers",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-72",
+          "name": "Cheese Burger",
+          "description": "Sandwiches and burgers",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-73",
+          "name": "Paneer Burger",
+          "description": "Sandwiches and burgers",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-74",
+          "name": "Malai Chaap",
+          "description": "Chaap and tandoori starters",
+          "pricePaise": 16900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-75",
+          "name": "Achaari Chaap",
+          "description": "Chaap and tandoori starters",
+          "pricePaise": 14900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-76",
+          "name": "Paneer Tikka",
+          "description": "Chaap and tandoori starters",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-77",
+          "name": "Masala Chaap",
+          "description": "Chaap and tandoori starters",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-78",
+          "name": "Mushroom Tikka",
+          "description": "Chaap and tandoori starters",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-79",
+          "name": "Malai Paneer Tikka",
+          "description": "Chaap and tandoori starters",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-80",
+          "name": "Tandoori Momos Paneer",
+          "description": "Chaap and tandoori starters",
+          "pricePaise": 12500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-81",
+          "name": "Tandoori Momos Veg",
+          "description": "Chaap and tandoori starters",
+          "pricePaise": 11900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-82",
+          "name": "Kurkure Momos Veg 2 (6 Pieces)",
+          "description": "Chaap and tandoori starters",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-83",
+          "name": "Aloo Chaat",
+          "description": "Chaat",
+          "pricePaise": 6900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-84",
+          "name": "Matar Chaat",
+          "description": "Chaat",
+          "pricePaise": 8400,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-85",
+          "name": "Pani Puri Full (7 Pieces)",
+          "description": "Chaat",
+          "pricePaise": 4500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-86",
+          "name": "Pani Puri Half (4 Pieces)",
+          "description": "Chaat",
+          "pricePaise": 3500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-87",
+          "name": "Dahi Batasha (5 Pieces)",
+          "description": "Chaat",
+          "pricePaise": 4900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-88",
+          "name": "Pani Puri",
+          "description": "Chaat",
+          "pricePaise": 2000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-89",
+          "name": "Samosa",
+          "description": "Chaat",
+          "pricePaise": 2500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-90",
+          "name": "Chola Samosa",
+          "description": "Chaat",
+          "pricePaise": 5000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-91",
+          "name": "Dahi Samosa",
+          "description": "Chaat",
+          "pricePaise": 3900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-92",
+          "name": "Chilli Paneer Fried Rice",
+          "description": "Combos",
+          "pricePaise": 34900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-93",
+          "name": "Manchurian Fried Rice",
+          "description": "Combos",
+          "pricePaise": 29900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-94",
+          "name": "Chola Pulao + Lassi",
+          "description": "Combos",
+          "pricePaise": 14900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-95",
+          "name": "Chola Samosa + Pani Puri Half (8 Pieces)",
+          "description": "Combos",
+          "pricePaise": 10500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-96",
+          "name": "Chola Sabji + Pani Puri Half (4 Pieces)",
+          "description": "Combos",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-97",
+          "name": "Kesar Milk",
+          "description": "Beverages",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-98",
+          "name": "Lassi",
+          "description": "Beverages",
+          "pricePaise": 7900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-99",
+          "name": "Burger (x2) + Kesar Milk (x2) + Pineapple",
+          "description": "Special offers and seasonal combos",
+          "pricePaise": 45100,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-100",
+          "name": "Burger (x2) + Kesar Milk (x2) + Strawberry Roll Pastry",
+          "description": "Special offers and seasonal combos",
+          "pricePaise": 45100,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-101",
+          "name": "Cadbury Celebrations Assorted Chocolate Gift + Rakhi Combo",
+          "description": "Special offers and seasonal combos",
+          "pricePaise": 21500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "mircha-ram-102",
+          "name": "Dry Fruit Laddu",
+          "description": "Festive specials (separate Swiggy listing)",
+          "pricePaise": 100,
+          "isVeg": true,
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "maa-annapurna-sweets",
+      "name": "maa annapurna sweets",
+      "area": "City",
+      "phone": "9000000000",
+      "active": true,
+      "items": [
+        {
+          "id": "maa-annapurna-sweets-1",
+          "name": "Refined Motichoor Laddu",
+          "description": "",
+          "pricePaise": 8900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-2",
+          "name": "Cham Cham",
+          "description": "",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-3",
+          "name": "Milk Cake",
+          "description": "",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-4",
+          "name": "Kaju Katli",
+          "description": "",
+          "pricePaise": 45900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-5",
+          "name": "Dry Fruit Laddu",
+          "description": "",
+          "pricePaise": 54900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-6",
+          "name": "Kalajaam",
+          "description": "",
+          "pricePaise": 3900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-7",
+          "name": "Semi Namak Pare",
+          "description": "Namkeen",
+          "pricePaise": 8900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-8",
+          "name": "Roasted Masala Kaju",
+          "description": "Namkeen",
+          "pricePaise": 54900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-9",
+          "name": "Mathri",
+          "description": "Namkeen",
+          "pricePaise": 8900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-10",
+          "name": "Kaju Palak Dalmoth",
+          "description": "Namkeen",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-11",
+          "name": "Kaju Masoor Dalmoth",
+          "description": "Namkeen",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-12",
+          "name": "Desi-Ghee Special Kaju Masoor Dalmoth",
+          "description": "Namkeen",
+          "pricePaise": 29900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-13",
+          "name": "Desi-Ghee Aloo Samosa",
+          "description": "Namkeen",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-14",
+          "name": "Mini Aloo Samosa (Refined)",
+          "description": "Namkeen",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-15",
+          "name": "Mini Masala Samosa (Refined)",
+          "description": "Namkeen",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-16",
+          "name": "Desi Ghee Ghewar",
+          "description": "Shravan specials",
+          "pricePaise": 50900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-17",
+          "name": "Peda",
+          "description": "Khoya sweets",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-18",
+          "name": "Plain Barfi",
+          "description": "Khoya sweets",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-19",
+          "name": "Cream Cheena",
+          "description": "Khoya sweets",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-20",
+          "name": "Garigond Laddu",
+          "description": "Khoya sweets",
+          "pricePaise": 22900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-21",
+          "name": "Milk Pudding",
+          "description": "Khoya sweets",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-22",
+          "name": "Mixed Mitthai (Only Khoya and Cheena)",
+          "description": "Khoya sweets",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-23",
+          "name": "Desi-Ghee Mini Masala Samosa",
+          "description": "Khoya sweets",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-24",
+          "name": "Milk Launj",
+          "description": "Khoya sweets",
+          "pricePaise": 20900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-25",
+          "name": "Magdal",
+          "description": "Khoya sweets",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-26",
+          "name": "Urad Daal Mewa Ladoo (Refined)",
+          "description": "Khoya sweets",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-27",
+          "name": "Desi Ghee Pattisa",
+          "description": "Desi ghee sweets",
+          "pricePaise": 26900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-28",
+          "name": "Desi Ghee Besan Laddu",
+          "description": "Desi ghee sweets",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-29",
+          "name": "Desi Ghee Dodda Barfi",
+          "description": "Desi ghee sweets",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-30",
+          "name": "Desi Ghee Motichoor Laddu",
+          "description": "Desi ghee sweets",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-31",
+          "name": "Desi Ghee Soan Papdi",
+          "description": "Desi ghee sweets",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-32",
+          "name": "Desi Ghee Chandrakala",
+          "description": "Desi ghee sweets",
+          "pricePaise": 26900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-33",
+          "name": "Desi Ghee Balushahi",
+          "description": "Desi ghee sweets",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-34",
+          "name": "Desi Ghee Mix Sweets",
+          "description": "Desi ghee sweets",
+          "pricePaise": 26900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-35",
+          "name": "Desi Ghee Moong Daal Pinni",
+          "description": "Desi ghee sweets",
+          "pricePaise": 27900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-36",
+          "name": "Dry Fruit Mix",
+          "description": "Dry fruit sweets",
+          "pricePaise": 54900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-37",
+          "name": "Kaju Pista Roll",
+          "description": "Dry fruit sweets",
+          "pricePaise": 59900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-38",
+          "name": "Mewa Bite",
+          "description": "Dry fruit sweets",
+          "pricePaise": 54900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-39",
+          "name": "Khajoor Dry Fruit Laddu",
+          "description": "Dry fruit sweets",
+          "pricePaise": 29900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-40",
+          "name": "Rasmalai",
+          "description": "Forever sweets",
+          "pricePaise": 5500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-41",
+          "name": "Sponge Chhena",
+          "description": "Forever sweets",
+          "pricePaise": 4500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-42",
+          "name": "Pineapple Cake",
+          "description": "Eggless cakes",
+          "pricePaise": 59900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-43",
+          "name": "Strawberry Cake Eggless",
+          "description": "Eggless cakes",
+          "pricePaise": 59900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-44",
+          "name": "Red-Velvet Cake Eggless",
+          "description": "Eggless cakes",
+          "pricePaise": 67300,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-45",
+          "name": "Black Forest Cake Eggless",
+          "description": "Eggless cakes",
+          "pricePaise": 59900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-46",
+          "name": "White-Forest Cake Eggless",
+          "description": "Eggless cakes",
+          "pricePaise": 74900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-47",
+          "name": "Chocolate-Almond Cake Eggless",
+          "description": "Eggless cakes",
+          "pricePaise": 74900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-48",
+          "name": "Oreo Cake Eggless",
+          "description": "Eggless cakes",
+          "pricePaise": 71900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-49",
+          "name": "Butterscotch Cake",
+          "description": "Eggless cakes",
+          "pricePaise": 59900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-50",
+          "name": "Vanilla Cake",
+          "description": "Eggless cakes",
+          "pricePaise": 59900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-51",
+          "name": "Eggless Black Forest Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 5900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-52",
+          "name": "Eggless Vanilla Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 5300,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-53",
+          "name": "Eggless Pineapple Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 5900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-54",
+          "name": "Eggless Butterscotch Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 5900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-55",
+          "name": "Eggless Choco-Chip Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 6900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-56",
+          "name": "Eggless Oreo Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 7900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-57",
+          "name": "Strawberry Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 5900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-58",
+          "name": "Blueberry Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 7900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-59",
+          "name": "Eggless Walnut Choco Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-60",
+          "name": "Eggless Kitkat Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-61",
+          "name": "Eggless Red-Velvet Pastry",
+          "description": "Eggless pastries",
+          "pricePaise": 7900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-62",
+          "name": "Amla Ka Achar",
+          "description": "Homemade pickles",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-63",
+          "name": "Hari March Ka Achar",
+          "description": "Homemade pickles",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-64",
+          "name": "Aam Ka Achar",
+          "description": "Homemade pickles",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-65",
+          "name": "Kathal Ka Achar",
+          "description": "Homemade pickles",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-66",
+          "name": "Lal Mirch Ka Achar",
+          "description": "Homemade pickles",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-67",
+          "name": "Mix Ka Achar",
+          "description": "Homemade pickles",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-68",
+          "name": "Aam Laccha (Khatta-Metha)",
+          "description": "Homemade pickles",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-69",
+          "name": "Lehsuni Ka Achar",
+          "description": "Homemade pickles",
+          "pricePaise": 16900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-70",
+          "name": "Nimbu Ka Aachar (Khatta-Metha)",
+          "description": "Homemade pickles",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-71",
+          "name": "Eggless Pineapple Bento",
+          "description": "Bento cakes",
+          "pricePaise": 17000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-72",
+          "name": "Eggless Butterscotch Bento Cake",
+          "description": "Bento cakes",
+          "pricePaise": 17000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-73",
+          "name": "Eggless Vanilla Bento Cake",
+          "description": "Bento cakes",
+          "pricePaise": 17000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-74",
+          "name": "Eggless Black Forest Bento Cake",
+          "description": "Bento cakes",
+          "pricePaise": 17000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-75",
+          "name": "Eggless Chocolate Bento Cake",
+          "description": "Bento cakes",
+          "pricePaise": 17000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "maa-annapurna-sweets-76",
+          "name": "Eggless Red-Velvet Bento Cake",
+          "description": "Bento cakes",
+          "pricePaise": 17000,
+          "isVeg": true,
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "dominos",
+      "name": "Dominos",
+      "area": "City",
+      "phone": "9000000000",
+      "active": true,
+      "items": [
+        {
+          "id": "dominos-1",
+          "name": "Margherita Pizza",
+          "description": "",
+          "pricePaise": 11200,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-2",
+          "name": "Double Cheese Margherita Pizza",
+          "description": "",
+          "pricePaise": 20900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-3",
+          "name": "Peppy Paneer Pizza",
+          "description": "",
+          "pricePaise": 26900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-4",
+          "name": "Mexican Green Wave Cheese Burst",
+          "description": "",
+          "pricePaise": 36100,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-5",
+          "name": "Indi Tandoori Paneer Cheese Burst",
+          "description": "",
+          "pricePaise": 41100,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-6",
+          "name": "Classic Pizza Mania",
+          "description": "",
+          "pricePaise": 4900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-7",
+          "name": "Capsicum & Red Paprika Pizza Mania",
+          "description": "",
+          "pricePaise": 8900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-8",
+          "name": "Golden Corn Pizza Mania",
+          "description": "",
+          "pricePaise": 8200,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-9",
+          "name": "Onion Pizza Mania",
+          "description": "",
+          "pricePaise": 10100,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-10",
+          "name": "Paneer & Capsicum with Videshi Hot Sauce",
+          "description": "",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-11",
+          "name": "Paneer, Onion & Capsicum with Desi Makhani Sauce",
+          "description": "",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-12",
+          "name": "Veg Loaded",
+          "description": "",
+          "pricePaise": 19200,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-13",
+          "name": "Burger Pizza – Classic Veg",
+          "description": "",
+          "pricePaise": 11900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-14",
+          "name": "Veggie Paradise Pizza",
+          "description": "",
+          "pricePaise": 27900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-15",
+          "name": "Farmhouse Pizza",
+          "description": "",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-16",
+          "name": "Indi Tandoori Paneer Pizza",
+          "description": "",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-17",
+          "name": "Veg Extravaganza Pizza",
+          "description": "",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-18",
+          "name": "Paneer Maxxx Tandoori Twist",
+          "description": "",
+          "pricePaise": 31900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-19",
+          "name": "Veggie Paradise Cheese Burst",
+          "description": "",
+          "pricePaise": 36100,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-20",
+          "name": "Margherita Cheese Burst",
+          "description": "",
+          "pricePaise": 19400,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-21",
+          "name": "Farmhouse Pizza – Regular",
+          "description": "",
+          "pricePaise": 26900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-22",
+          "name": "Veggie Paradise Pizza – Regular",
+          "description": "",
+          "pricePaise": 27900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-23",
+          "name": "Margherita Pizza – Regular",
+          "description": "",
+          "pricePaise": 11200,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-24",
+          "name": "Double Cheese Margherita Pizza – Regular",
+          "description": "",
+          "pricePaise": 20900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-25",
+          "name": "5 Course Meal – Classic Pizza",
+          "description": "",
+          "pricePaise": 19305,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-26",
+          "name": "5 Course Meal – Onion Pizza",
+          "description": "",
+          "pricePaise": 21305,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-27",
+          "name": "Meal for 4 – Veg Extravaganza & Indi Tandoori Paneer",
+          "description": "",
+          "pricePaise": 116880,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-28",
+          "name": "Meal for 4 – Margherita & Peppy Paneer",
+          "description": "",
+          "pricePaise": 80080,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-29",
+          "name": "Meal for 2 – Farmhouse & Veg Extravaganza",
+          "description": "",
+          "pricePaise": 64914,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-30",
+          "name": "Meal for 2 – Veg Paradise & Farmhouse",
+          "description": "",
+          "pricePaise": 61914,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-31",
+          "name": "Margherita Pizza Regular",
+          "description": "",
+          "pricePaise": 11200,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-32",
+          "name": "Paneer Cheese Bowl-Cano",
+          "description": "",
+          "pricePaise": 17800,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-33",
+          "name": "Classic Cheese Bowl-Cano",
+          "description": "",
+          "pricePaise": 14800,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-34",
+          "name": "Cheesy Dip",
+          "description": "",
+          "pricePaise": 2857,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-35",
+          "name": "Makhani Paneer Tikka Garlic Bread",
+          "description": "",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-36",
+          "name": "Fiery Corn & Jalapeno Garlic Bread",
+          "description": "",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-37",
+          "name": "Fiery Paneer Tikka Garlic Bread",
+          "description": "",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-38",
+          "name": "Korean Corn & Jalapeno Garlic Bread",
+          "description": "",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-39",
+          "name": "Tomato Ketchup",
+          "description": "",
+          "pricePaise": 21900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-40",
+          "name": "Korean Paneer Tikka Garlic Bread",
+          "description": "",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-41",
+          "name": "Classic Stuffed Garlic Bread",
+          "description": "",
+          "pricePaise": 15900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-42",
+          "name": "Makhani Corn & Jalapeno Garlic Bread",
+          "description": "",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-43",
+          "name": "Garlic Breadsticks",
+          "description": "",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-44",
+          "name": "Paneer Tikka Stuffed Garlic Bread",
+          "description": "",
+          "pricePaise": 16900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-45",
+          "name": "Garlic Breadsticks + Beverage",
+          "description": "",
+          "pricePaise": 16900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-46",
+          "name": "Cream and Onion Dip",
+          "description": "",
+          "pricePaise": 3905,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-47",
+          "name": "Peri Peri Dip",
+          "description": "",
+          "pricePaise": 3905,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-48",
+          "name": "Garlic Breadsticks + Cheesy Dip",
+          "description": "",
+          "pricePaise": 14857,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-49",
+          "name": "Cheese Lava – Veg Paradise",
+          "description": "",
+          "pricePaise": 42900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-50",
+          "name": "Cheese Lava – Peppy Paneer",
+          "description": "",
+          "pricePaise": 42900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-51",
+          "name": "Cheese Lava – Golden Corn",
+          "description": "",
+          "pricePaise": 42900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-52",
+          "name": "Cheese Lava – Farmhouse",
+          "description": "",
+          "pricePaise": 42900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-53",
+          "name": "Choco Lava Cake Gift Hamper",
+          "description": "",
+          "pricePaise": 35700,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-54",
+          "name": "Choco Lava Cake + Beverage",
+          "description": "",
+          "pricePaise": 16900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-55",
+          "name": "Red Velvet Lava Cake",
+          "description": "",
+          "pricePaise": 14900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-56",
+          "name": "Choco Lava Cake",
+          "description": "",
+          "pricePaise": 12900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-57",
+          "name": "Choco Mousse",
+          "description": "",
+          "pricePaise": 7900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-58",
+          "name": "Blueberry Mousse",
+          "description": "",
+          "pricePaise": 7900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-59",
+          "name": "Butterscotch Mousse",
+          "description": "",
+          "pricePaise": 7900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-60",
+          "name": "Butterscotch Mousse Cake",
+          "description": "",
+          "pricePaise": 11333,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-61",
+          "name": "Classic Cold Coffee (300 ml)",
+          "description": "",
+          "pricePaise": 11900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-62",
+          "name": "Coca-Cola (475 ml)",
+          "description": "",
+          "pricePaise": 6666,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-63",
+          "name": "Special Party for 4 (Veg)",
+          "description": "",
+          "pricePaise": 101928,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-64",
+          "name": "2-in-1 Cheese Burst – Margherita (Regular)",
+          "description": "",
+          "pricePaise": 22900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "dominos-65",
+          "name": "2-in-1 Cheese Burst – Corn N Cheese (Regular)",
+          "description": "",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "hotel-siddharth-palace",
+      "name": "Hotel Siddharth Palace",
+      "area": "City",
+      "phone": "9000000000",
+      "active": true,
+      "items": [
+        {
+          "id": "hotel-siddharth-palace-1",
+          "name": "Tomato Dhaniya Shorba",
+          "description": "Soups & Salads",
+          "pricePaise": 14900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-2",
+          "name": "Cream of Mushroom Soup",
+          "description": "Soups & Salads",
+          "pricePaise": 15900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-3",
+          "name": "Cream of Tomato Soup",
+          "description": "Soups & Salads",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-4",
+          "name": "Veg Sweet Corn Soup",
+          "description": "Soups & Salads",
+          "pricePaise": 18900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-5",
+          "name": "Cream of Veg Soup",
+          "description": "Soups & Salads",
+          "pricePaise": 18900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-6",
+          "name": "Veg Hot and Sour Soup",
+          "description": "Soups & Salads",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-7",
+          "name": "Lemon Coriander Soup",
+          "description": "Soups & Salads",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-8",
+          "name": "Veg Clear Soup",
+          "description": "Soups & Salads",
+          "pricePaise": 14900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-9",
+          "name": "Veg Peking Soup",
+          "description": "Soups & Salads",
+          "pricePaise": 15900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-10",
+          "name": "Manchow Soup",
+          "description": "Soups & Salads",
+          "pricePaise": 15900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-11",
+          "name": "Green Salad",
+          "description": "Soups & Salads",
+          "pricePaise": 9900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-12",
+          "name": "Paneer Kalimirch Dry",
+          "description": "Starters & Snacks",
+          "pricePaise": 25900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-13",
+          "name": "Potato Kalimirch Dry",
+          "description": "Starters & Snacks",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-14",
+          "name": "Crisp and Kurkure Aloo Chaat",
+          "description": "Starters & Snacks",
+          "pricePaise": 22900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-15",
+          "name": "Veg Cutlet",
+          "description": "Starters & Snacks",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-16",
+          "name": "Cheese Cutlet",
+          "description": "Starters & Snacks",
+          "pricePaise": 24900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-17",
+          "name": "Plain French Fries",
+          "description": "Starters & Snacks",
+          "pricePaise": 19900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-18",
+          "name": "Peri Peri Fries",
+          "description": "Starters & Snacks",
+          "pricePaise": 20900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-19",
+          "name": "Paneer Pakora",
+          "description": "Starters & Snacks",
+          "pricePaise": 25200,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-20",
+          "name": "Peanut Masala",
+          "description": "Starters & Snacks",
+          "pricePaise": 22900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-21",
+          "name": "Veg Spring Roll with Hot Garlic Sauce",
+          "description": "Starters & Snacks",
+          "pricePaise": 35900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-22",
+          "name": "Baby Corn Salt and Pepper",
+          "description": "Starters & Snacks",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-23",
+          "name": "Dahi Ke Kebab",
+          "description": "Starters & Snacks",
+          "pricePaise": 26900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-24",
+          "name": "Honey Chilli Potato",
+          "description": "Starters & Snacks",
+          "pricePaise": 29900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-25",
+          "name": "Aloo Chaat",
+          "description": "Starters & Snacks",
+          "pricePaise": 25900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-26",
+          "name": "Hara Bhara Kebab",
+          "description": "Starters & Snacks",
+          "pricePaise": 24900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-27",
+          "name": "Soya Malai Chaap",
+          "description": "Starters & Snacks",
+          "pricePaise": 33900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-28",
+          "name": "Lahsuni Paneer Tikka",
+          "description": "Starters & Snacks",
+          "pricePaise": 33900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-29",
+          "name": "Pudina Paneer Tikka",
+          "description": "Starters & Snacks",
+          "pricePaise": 38300,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-30",
+          "name": "Paneer Shahi Tikka",
+          "description": "Starters & Snacks",
+          "pricePaise": 34900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-31",
+          "name": "Mushroom Tikka",
+          "description": "Starters & Snacks",
+          "pricePaise": 31900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-32",
+          "name": "Bharwan Mushroom Tikka",
+          "description": "Starters & Snacks",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-33",
+          "name": "Makhan Malai Pasanda",
+          "description": "Indian Main Course",
+          "pricePaise": 33900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-34",
+          "name": "Noorjahani Paneer",
+          "description": "Indian Main Course",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-35",
+          "name": "Hariyali Paneer",
+          "description": "Indian Main Course",
+          "pricePaise": 35900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-36",
+          "name": "Shahi Paneer",
+          "description": "Indian Main Course",
+          "pricePaise": 31900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-37",
+          "name": "Handi Paneer",
+          "description": "Indian Main Course",
+          "pricePaise": 36600,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-38",
+          "name": "Paneer Korma",
+          "description": "Indian Main Course",
+          "pricePaise": 33900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-39",
+          "name": "Kadhai Paneer",
+          "description": "Indian Main Course",
+          "pricePaise": 37100,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-40",
+          "name": "Tawa Paneer",
+          "description": "Indian Main Course",
+          "pricePaise": 34900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-41",
+          "name": "Paneer Do Pyaza",
+          "description": "Indian Main Course",
+          "pricePaise": 33900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-42",
+          "name": "Paneer Bhurjia",
+          "description": "Indian Main Course",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-43",
+          "name": "Paneer Lababdar",
+          "description": "Indian Main Course",
+          "pricePaise": 33900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-44",
+          "name": "Paneer Tikka Masala",
+          "description": "Indian Main Course",
+          "pricePaise": 36900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-45",
+          "name": "Paneer Mirchi Masala",
+          "description": "Indian Main Course",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-46",
+          "name": "Punjabi Paneer",
+          "description": "Indian Main Course",
+          "pricePaise": 33500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-47",
+          "name": "Achari Paneer",
+          "description": "Indian Main Course",
+          "pricePaise": 35900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-48",
+          "name": "Mushroom Butter Masala",
+          "description": "Indian Main Course",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-49",
+          "name": "Mushroom Do Pyaza",
+          "description": "Indian Main Course",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-50",
+          "name": "Mushroom Korma",
+          "description": "Indian Main Course",
+          "pricePaise": 33900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-51",
+          "name": "Dum Aloo Banarsi",
+          "description": "Indian Main Course",
+          "pricePaise": 33900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-52",
+          "name": "Dum Aloo Kashmiri",
+          "description": "Indian Main Course",
+          "pricePaise": 34900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-53",
+          "name": "Dum Aloo Lucknowi",
+          "description": "Indian Main Course",
+          "pricePaise": 28900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-54",
+          "name": "Malai Kofta",
+          "description": "Indian Main Course",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-55",
+          "name": "Nargisi Kofta",
+          "description": "Indian Main Course",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-56",
+          "name": "Veg Kofta Curry",
+          "description": "Indian Main Course",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-57",
+          "name": "Punjabi Kofta",
+          "description": "Indian Main Course",
+          "pricePaise": 33900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-58",
+          "name": "Navratan Korma",
+          "description": "Indian Main Course",
+          "pricePaise": 29900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-59",
+          "name": "Punjabi Dal Tadka",
+          "description": "Dal & Vegetables",
+          "pricePaise": 26900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-60",
+          "name": "Dal Fry",
+          "description": "Dal & Vegetables",
+          "pricePaise": 25900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-61",
+          "name": "Dal Makhani",
+          "description": "Dal & Vegetables",
+          "pricePaise": 34700,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-62",
+          "name": "Dal Tadka",
+          "description": "Dal & Vegetables",
+          "pricePaise": 26900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-63",
+          "name": "Hariyali Dal",
+          "description": "Dal & Vegetables",
+          "pricePaise": 24900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-64",
+          "name": "Chola Masala",
+          "description": "Dal & Vegetables",
+          "pricePaise": 27900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-65",
+          "name": "Achari Aloo",
+          "description": "Dal & Vegetables",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-66",
+          "name": "Khade Masale Ke Aloo",
+          "description": "Dal & Vegetables",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-67",
+          "name": "Dhaniya Aloo",
+          "description": "Dal & Vegetables",
+          "pricePaise": 18900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-68",
+          "name": "Veg Jalfrezi",
+          "description": "Dal & Vegetables",
+          "pricePaise": 24900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-69",
+          "name": "Paneer Jalfrezi",
+          "description": "Dal & Vegetables",
+          "pricePaise": 25900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-70",
+          "name": "Green Peas Dry",
+          "description": "Dal & Vegetables",
+          "pricePaise": 15900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-71",
+          "name": "Veg Manchurian",
+          "description": "Chinese",
+          "pricePaise": 30900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-72",
+          "name": "Paneer Manchurian",
+          "description": "Chinese",
+          "pricePaise": 31900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-73",
+          "name": "Plain Rice",
+          "description": "Rice",
+          "pricePaise": 14900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-74",
+          "name": "Veg Pulao",
+          "description": "Rice",
+          "pricePaise": 21900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-75",
+          "name": "Matar Pulao",
+          "description": "Rice",
+          "pricePaise": 20900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-76",
+          "name": "Kesariya Pulao",
+          "description": "Rice",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-77",
+          "name": "Vegetable Fried Rice",
+          "description": "Rice",
+          "pricePaise": 31900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-78",
+          "name": "Chilli Garlic Fried Rice",
+          "description": "Rice",
+          "pricePaise": 31900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-79",
+          "name": "Schezwan Fried Rice",
+          "description": "Rice",
+          "pricePaise": 32900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-80",
+          "name": "Veggie Burger",
+          "description": "Burgers & Sandwiches",
+          "pricePaise": 14000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-81",
+          "name": "Cheese Burger",
+          "description": "Burgers & Sandwiches",
+          "pricePaise": 16500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-82",
+          "name": "Paneer Burger",
+          "description": "Burgers & Sandwiches",
+          "pricePaise": 17500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-83",
+          "name": "Potato and Paneer Sandwich",
+          "description": "Burgers & Sandwiches",
+          "pricePaise": 18600,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-84",
+          "name": "Three Layer Special Sandwich",
+          "description": "Burgers & Sandwiches",
+          "pricePaise": 22800,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-85",
+          "name": "Cheese Grilled Sandwich",
+          "description": "Burgers & Sandwiches",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-86",
+          "name": "Margherita Pizza",
+          "description": "Pizza",
+          "pricePaise": 24600,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-87",
+          "name": "Paneer Tikka Pizza",
+          "description": "Pizza",
+          "pricePaise": 31200,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-88",
+          "name": "Corn Cheese Pizza",
+          "description": "Pizza",
+          "pricePaise": 28800,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-89",
+          "name": "Mixed Veg Pizza (8 inches)",
+          "description": "Pizza",
+          "pricePaise": 27000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-90",
+          "name": "Tomato Capsicum Onion Pizza",
+          "description": "Pizza",
+          "pricePaise": 30000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-91",
+          "name": "Plain Dosa",
+          "description": "South Indian",
+          "pricePaise": 17900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-92",
+          "name": "Pav Bhaji Dosa",
+          "description": "South Indian",
+          "pricePaise": 26300,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-93",
+          "name": "Masala Dosa",
+          "description": "South Indian",
+          "pricePaise": 21500,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-94",
+          "name": "Special Onion Dosa",
+          "description": "South Indian",
+          "pricePaise": 22700,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-95",
+          "name": "Paneer Dosa",
+          "description": "South Indian",
+          "pricePaise": 23900,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-96",
+          "name": "Spring Dosa",
+          "description": "South Indian",
+          "pricePaise": 22700,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-97",
+          "name": "Pay Bhaji Dosa",
+          "description": "South Indian",
+          "pricePaise": 25100,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-98",
+          "name": "Tawa Roti Plain (1 pc)",
+          "description": "Breads",
+          "pricePaise": 3000,
+          "isVeg": true,
+          "available": true
+        },
+        {
+          "id": "hotel-siddharth-palace-99",
+          "name": "Maggi Masala",
+          "description": "Quick Bites",
+          "pricePaise": 16800,
           "isVeg": true,
           "available": true
         }

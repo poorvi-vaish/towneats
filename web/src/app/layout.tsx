@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
 import { BUSINESS } from "@/lib/config";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: `TownEats — City food delivered to ${BUSINESS.townName}`,
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <CartProvider>{children}</CartProvider>
+        <Analytics />
       </body>
     </html>
   );
